@@ -1,4 +1,5 @@
-# UUID        	Group Name
+# UUID                 	Group Name
 #
-user:Varun-BP 	user/Varun B P (Varun-BP)
-user:siddhrans	user/Siddhrans (siddhrans)
+global:Registered-Users	Registered Users
+user:Varun-BP          	user/Varun B P (Varun-BP)
+user:siddhrans         	user/Siddhrans (siddhrans)
