@@ -34,7 +34,6 @@
 <!-- angularjs js file -->
 <script type="text/javascript" src="js/angular.js"></script>
 <script type="text/javascript" src="js/DonorController.js"></script>
-<!-- <script type="text/javascript" src="js/create_service.js"></script> -->
 
 <!-- datepicker js file-->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -87,33 +86,33 @@
 							<div class="col-md-6">
 								<div class="input-group input-group-lg">
 									<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span>
-									<input type="text" class="form-control" placeholder="First Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donarfirstname">
+									<input type="text" class="form-control" placeholder="First Name" aria-describedby="sizing-addon1" ng-model="dono.data.donarfirstname">
 								</div> <br>
 						
 								<div class="input-group input-group-lg">
 									<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span>
-									<input type="text" class="form-control" placeholder="Last Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donarlastname"> 
+									<input type="text" class="form-control" placeholder="Last Name" aria-describedby="sizing-addon1" ng-model="dono.data.donarlastname"> 
 								</div><br>
 						
 								<div class="input-group input-group-lg">
 									<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-envelope"></span></span>
-									<input type="text" class="form-control" placeholder="Email" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donaremail">
+									<input type="text" class="form-control" placeholder="Email" aria-describedby="sizing-addon1" ng-model="dono.data.donaremail">
 								</div><br>
 						
 								<div class="input-group input-group-lg">
 									<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-phone"></span></span>
-									<input type="text" class="form-control" placeholder="Mobile" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donarmobile">
+									<input type="text" class="form-control" placeholder="Mobile" aria-describedby="sizing-addon1" ng-model="dono.data.donarmobile">
 								</div><br>
 								 <div class="input-group input-group-lg">
 					                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-road"></span></span>
-					                  <input type="text" class="form-control"  placeholder="Address" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donaraddress">
+					                  <input type="text" class="form-control"  placeholder="Address" aria-describedby="sizing-addon1" ng-model="dono.data.donaraddress">
 								</div> <br>
 							</div>
 							<div class="col-md-6">
 								<div class="input-group input-group-lg">
 									<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-asterisk"></span></span>
 									<!-- <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> -->
-									<select class="form-control" ng-model="dono.donar_info.donarRegion">
+									<select class="form-control" ng-model="dono.data.donarRegion">
 				                      	<option>--Region--</option>    
 				                        <option>SB</option>
 				                        <option>CA</option>
@@ -125,7 +124,7 @@
 			                   <div class="input-group input-group-lg">
 				                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-tower"></span></span>
 				                      <!-- <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> -->
-				                      <select class="form-control" ng-model="dono.donar_info.donarCity">
+				                      <select class="form-control" ng-model="dono.data.donarCity">
 				                      	<option>--City--</option>    
 				                        <option>SB</option>
 				                        <option>CA</option>
@@ -137,7 +136,7 @@
 			                 <div class="input-group input-group-lg">
 			                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-bookmark"></span></span>
 			                      <!-- <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> -->
-			                      <select class="form-control" ng-model="dono.donar_info.donarState">
+			                      <select class="form-control" ng-model="dono.data.donarState">
 			                      	<option>--State--</option>    
 			                        <option>SB</option>
 			                        <option>CA</option>
@@ -149,7 +148,7 @@
 			                 <div class="input-group input-group-lg">
 			                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-check"></span></span>
 			                      <!--  <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> --> 
-			                      <select class="form-control"  ng-model="dono.donar_info.donarCenter">
+			                      <select class="form-control"  ng-model="dono.data.donarCenter">
 			                      	<option>--Center--</option>    
 			                        <option>SB</option>
 			                        <option>CA</option>
@@ -174,29 +173,28 @@
 					<div id="bank" class="tab-pane fade">
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span>
-							<input type="text" class="form-control" placeholder="Account Holder Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetails.bankDetailsAccountHolderName">
+							<input type="text" class="form-control" placeholder="Account Holder Name" aria-describedby="sizing-addon1" ng-model="dono.data.bankDetails.bankDetailsAccountHolderName">
 						</div> <br>                  
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-home"></span></span>
-							<input type="text" class="form-control" placeholder="Bank Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetails.bankDetailsBankName">
+							<input type="text" class="form-control" placeholder="Bank Name" aria-describedby="sizing-addon1" ng-model="dono.data.bankDetails.bankDetailsBankName">
 						</div> <br>           
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-th-list"></span></span>
-							<input type="text" class="form-control" placeholder="Account No." aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetails.bankDetailsAccountNo">
+							<input type="text" class="form-control" placeholder="Account No." aria-describedby="sizing-addon1" ng-model="dono.data.bankDetails.bankDetailsAccountNo">
 						</div> <br>     
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-flag"></span></span>
-							<input type="text" class="form-control" placeholder="Branch" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetails.bankDetailsBranch">
+							<input type="text" class="form-control" placeholder="Branch" aria-describedby="sizing-addon1" ng-model="dono.data.bankDetails.bankDetailsBranch">
 						</div> <br>                         
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-record"></span></span>
-							<input type="text" class="form-control" placeholder="IFSC Code" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetails.bankDetailsIFSCCode">
+							<input type="text" class="form-control" placeholder="IFSC Code" aria-describedby="sizing-addon1" ng-model="dono.data.bankDetails.bankDetailsIFSCCode">
 						</div> <br>                       
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-check"></span></span>
 							<!-- <input type="text" class="form-control" placeholder="First Name" aria-describedby="sizing-addon1"> -->
-							<select class="form-control" ng-model="dono.donar_info.bankDetails.bankDetailsAccountType">
-								<option>--Account Type--</option>
+							<select class="form-control" ng-model="dono.data. bankDetails.bankDetailsAccountType">
 								<option>SB</option>
 								<option>CA</option>
 								<option>SB-NRE</option>
@@ -217,7 +215,7 @@
 						<div class='input-group date'>
 						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 						</span>
-								<input type='text' id="datepicker1" class="form-control" placeholder="Start Date" ng-model="dono.donar_info.paymentDetails.paymentDetailsStartDate"/>
+								<input type='text' id="datepicker1" class="form-control" placeholder="Start Date" ng-model="dono.data.paymentDetails.paymentDetailsStartDate"/>
 						</div>
 					</div>
 					
@@ -236,20 +234,20 @@
 							    <span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar"></span>
 							   </span>
-								  <input type='text' id="datepicker2"  class="form-control" placeholder="End Date Date" ng-model="dono.donar_info.paymentDetails.paymentDetailsEndDate"/>
+								  <input type='text' id="datepicker2"  class="form-control" placeholder="End Date Date" ng-model="dono.data.paymentDetails.paymentDetailsEndDate"/>
 								
 							</div>
 						</div> 
 						<div class="input-group input-group-lg">
 							<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-usd"></span></span>
-							<input type="text" class="form-control" placeholder="Amount in Rupees" aria-describedby="sizing-addon1" ng-model="dono.donar_info.paymentDetails.paymentDetailsAmountInRs">
+							<input type="text" class="form-control" placeholder="Amount in Rupees" aria-describedby="sizing-addon1" ng-model="dono.data.paymentDetails.paymentDetailsAmountInRs">
 						</div> <br>
 					
 					
 						<div class="input-group input-group-lg">
 					      <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-check"></span></span>
 					           <!-- <input type="text" class="form-control"  placeholder="" aria-describedby="sizing-addon1"> -->
-			                      <select class="form-control" placeholder="Frequency" ng-model="dono.donar_info.paymentDetails.paymentDetailsFrequency">
+			                      <select class="form-control" placeholder="Frequency" ng-model="dono.data.paymentDetails.paymentDetailsFrequency">
 			                      	<option>--Frequency--</option>    
 			                          <option>Daily</option>
 			                          <option>Weekly</option>
