@@ -1,0 +1,25 @@
+{
+  "name": "bower.json",
+  "description": "package",
+  "main": "bower.json",
+  "keywords": [
+    "json"
+  ],
+  "authors": [
+    "s"
+  ],
+  "license": "s",
+  "homepage": "s",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "package": "^0.1.2"
+  }
+}

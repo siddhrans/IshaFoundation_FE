@@ -1,0 +1,102 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>login</title>
+<!-- bootstrap css files -->
+<link rel="stylesheet" href="css/bootstrap-theme.css">
+<link rel="stylesheet" href="css/bootstrap-theme.css.map">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css.map">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap.css.map">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css.map">
+
+<!-- Bootstrap js files -->
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="js/npm.js"></script> -->
+
+<!-- bootstrap fonts -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+<!-- angularjs js file -->
+<script type="text/javascript" src="js/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script type="text/javascript" src="js/controller/controller.js"></script>
+<script type="text/javascript" src="js/service/service.js"></script>
+
+<!-- css files -->
+
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body ng-app="loginApp" ng-controller="loginController as ctrl">
+	<div class="container">
+		<div class="row">
+			 <div class="col-xs-6 col-md-4"></div>
+  			 <div class="col-xs-6 col-md-4">
+  			 	<div class="panel panel-default" id="log-form">
+  			 		<div class="panel-header" id="log-header">
+  			 			<ul class="nav nav-tabs nav-justified">
+							<li  class="active"><a data-toggle="tab"  href="#login">LOGIN</a></li>
+							<li ><a data-toggle="tab" href="#register">REGISTER</a></li>
+						</ul>
+  			 		</div>
+  			 		<div class="panel-body">
+  			 		<div class="tab-content">
+  			 				<div id="login" class="tab-pane fade in active">
+  			 					<!-- <div id="login"> -->
+	  			 					<form id="login_form" ng-submit="ctrl.fetchDonors();" name="loginForm">
+	  			 						<div class="form-horizontally">		
+											<div class="input-group" id="form_group1">
+									  			<span class="input-group-addon" id="first_add"><span class="glyphicon glyphicon-user"></span></span>
+									  			<input type="text" class="form-control" name="name" placeholder="Username" aria-describedby="first_add" ng-model="ctrl.logs.name" ng-minlength="6" ng-maxlength="12" required>
+												<span ng-show="loginForm.name.$dirty && loginForm.name.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Required!</span>
+												<span ng-show="loginForm.name.$dirty && loginForm.name.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">Name/Mobile number is too short!</span>
+												<span ng-show="loginForm.name.$dirty && loginForm.name.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">Name/Mobile number is too long!</span>
+											</div>
+											<div class="input-group" id="form_group2">
+											  <span class="input-group-addon" id="second_add"><span class="glyphicon glyphicon-lock"></span></span>
+											  <input type="password" class="form-control" name="password" placeholder="Enter password" aria-describedby="second_add" ng-model="ctrl.logs.password" ng-minlength="6" ng-maxlength="12" required>
+												<span ng-show="loginForm.password.$dirty && loginForm.password.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Required!</span>
+												<span ng-show="loginForm.password.$dirty && loginForm.password.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">Password is too short!</span>
+												<span ng-show="loginForm.password.$dirty && loginForm.password.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">Password nuber is too long!</span>
+											</div>
+											<!-- <input type="checkbox" id="terms-box">&ensp;I accept <a href="">terms &amp; conditions</a> -->	
+											<button class="btn  btn-default btn-lg btn-block" ng-disabled="loginForm.$invalid">LOGIN</button>
+											<!-- <h5 ><a href="#">Forgot Passcode</a></h5> -->		
+	  			 						</div>
+	  			 					</form>
+	  			 			
+  			 				</div>
+  			 			<div id="register" class="tab-pane fade ">
+			  			 		<form id="register_form" ng-submit="ctrl.createDonor()">
+	  			 				<div class="form-horizontally">		
+									<div class="input-group" id="form_group1">
+									  <span class="input-group-addon" id="first_add"><span class="glyphicon glyphicon-user"></span></span>
+									  <input type="text" class="form-control" placeholder="Username" aria-describedby="first_add" ng-model="ctrl.user.name">
+									</div>
+									<div class="input-group" id="form_group2">
+									  <span class="input-group-addon" id="second_add"><span class="glyphicon glyphicon-lock"></span></span>
+									  <input type="password" class="form-control" placeholder="Enter password" aria-describedby="second_add" ng-model="ctrl.user.password">
+									</div>
+									<!-- <input type="checkbox" id="terms-box">&ensp;I accept <a href="">terms &amp; conditions</a> -->	
+									<button class="btn  btn-default btn-lg btn-block" >REGISTER</button>
+									<!-- <h5 ><a href="#">Forgot Passcode</a></h5> -->		
+	  			 				</div>
+	  			 			
+	  			 			</form>
+			  			 	
+  			 				</div>
+		  			 	</div> 
+  			 		</div>
+  			 	</div>
+  			 </div>
+  			 <div class="col-xs-6 col-md-4"></div>
+		
+		</div>
+	</div>
+</body>
+</html>
