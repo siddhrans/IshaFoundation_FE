@@ -1,0 +1,311 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Create Donor</title>
+<!-- bootstrap css files -->
+<link rel="stylesheet" href="css/bootstrap-theme.css">
+<link rel="stylesheet" href="css/bootstrap-theme.css.map">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css.map">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap.css.map">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css.map">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Bootstrap js files -->
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- bootstrap fonts -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- angularjs js file -->
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/controller/controller.js"></script>
+<script type="text/javascript" src="js/service/service.js"></script>
+
+<!-- css files -->
+
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body ng-app="loginApp" ng-controller="loginController as dono">
+<div class="container-fluid" >
+	<div class="row" id="toolBar">
+		<div class="col-xs-12 col-md-4" id="menuBar">
+			<img src="images/logo.png" alt="Isha Foundation">
+		</div>
+		<div class="col-xs-12 col-md-4" id="Dash"></div>
+			<div class="col-xs-12 col-md-4">
+				<div id="user-info">
+					<i class="glyphicon glyphicon-user" style="font-size:20px"></i>
+					<h5 id="user-info-name" style="margin-left: 58px;margin-top:-20px;">Hi Dear User</h5>
+				</div>
+				<div id="settings-sign-out">
+					<ul>
+						<li><a href="#"><i class="glyphicon glyphicon-cog" data-toggle="tooltip"  data-placement="bottom"  title="settings"></i> </a></li>
+						<li><a href="#"><i class="material-icons" data-toggle="tooltip"  data-placement="bottom" title="help?">&#xe8fd;</i></a></li>
+						<li><a href="#"><i class="glyphicon glyphicon-log-out" data-toggle="tooltip" data-placement="bottom"  title="sign-out" ></i></a></li>
+					</ul>
+				</div>
+			</div>
+	</div>
+</div>
+
+<!-- start of wrapper -->
+	<div id="wrapper">
+		<!-- Sidebar -->
+			<div  id="sidebar-wrapper">
+				<ul class="sidebar-nav">
+							<li style="margin-top: -36px;color:#fff;">MENU <i class="glyphicon glyphicon-th" style="margin-left: 82px;font-size: 20px;"></i></li>
+							<li ><a href="#" >DASHBOARD</a></li>
+				  			<li class="active"><a href="#">CREATE DONOR</a></li>
+				  			<li><a href="#">BULK OPERATIONS</a></li>
+				  			<li><a href="#">REPORTS</a></li>
+				</ul>
+			</div>
+			<div id="sidebar-wrapper2" class="nav2">
+				<ul class="sidebar-nav" style="padding-top: 35px;">
+					<li > <i class="glyphicon glyphicon-home"></i></li>
+				  	<li><i class="fa fa-user-plus"></i></li>
+				  	<li><i class="glyphicon glyphicon-floppy-save"></i></li>
+				  	<li><i class="fa fa-folder-open"></i></li>
+				</ul>
+			</div>
+		<!-- end of sidebar -->
+		
+		<!-- page content -->
+			<div id="page-content-wrapper">
+				<div id="container-fluid" id="containerBody" style="background:#F0F0F0">
+					<div class="row">
+					<!-- start of container -->
+						<div class="container">
+							<div class="row">
+								<div class="col-xs-8 col-md-8" id="Cdonor">	   
+									<h2>Create Donor</h2> 
+									<form class="navbar-form" role="search">
+											<div class="input-group add-on" style="margin-left: 486px;">
+										      	<input class="form-control" placeholder="Search" name="srch-term" id="srch-term" type="text">
+											      	<div class="input-group-btn">
+											        	<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+							      					 </div>
+						   					 </div>
+									 </form>
+										<ul id = "myTab"  class="nav nav-tabs">
+											<li class="active"><a data-toggle="tab" href="#personal">Personal Information</a></li>
+											<li><a data-toggle="tab" href="#bank">Bank Details</a></li>
+											<li><a data-toggle="tab" href="#payment">Payment Details</a></li>
+										</ul>
+										<!-- Start of tab content -->
+									<form ng-submit="dono.createDonor();">
+										<div class="tab-content">
+										<!-- Start of personal details -->
+											<div id="personal" class="tab-pane fade in active">
+												<div class="col-lg-12">
+													<div class="col-md-6">
+														<div class="input-group input-group-lg">
+															<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span>
+															<input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donorfirstname">
+															 
+														</div> <br>
+												
+														<div class="input-group input-group-lg">
+															<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span>
+															<input type="text" class="form-control" placeholder="Last Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donorlastname"> 
+														</div><br>
+												
+														<div class="input-group input-group-lg">
+															<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-envelope"></span></span>
+															<input type="text" class="form-control" placeholder="Email" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donoremail">
+														</div><br>
+												
+														<div class="input-group input-group-lg">
+															<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-phone"></span></span>
+															<input type="text" class="form-control" placeholder="Mobile" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donormobile">
+														</div><br>
+														 <div class="input-group input-group-lg">
+											                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-road"></span></span>
+											                  <input type="text" class="form-control"  placeholder="Address" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donorAddress">
+														</div> <br>
+													</div>
+													<div class="col-md-6">
+														<div class="input-group input-group-lg">
+															<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-asterisk"></span></span>
+															<!-- <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> -->
+															<select class="form-control" ng-model="dono.donar_info.donorRegion">
+										                      	<option>--Region--</option>    
+										                        <option>Andhra Pradesh</option>
+										                        <option>Telangana</option>
+									                      	</select>
+														</div> <br>
+									                   <div class="input-group input-group-lg">
+										                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-tower"></span></span>
+										                      <!-- <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> -->
+										                      <select class="form-control" ng-model="dono.donar_info.donorCity">
+										                      	<option>--City--</option>    
+										                        <option>Hyderabad</option>
+										                        <option>Vijayawada</option>
+										                        <option>Vizag</option>
+										                      </select>
+									                   </div> <br>
+									                 <div class="input-group input-group-lg">
+									                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-bookmark"></span></span>
+									                      <!-- <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> -->
+									                      <select class="form-control" ng-model="dono.donar_info.donorState">
+									                      	<option>--State--</option>    
+									                        <option>Andhra Pradesh</option>
+									                        <option>Telangana</option>
+									                      </select>
+									                   </div> <br>
+									                 <div class="input-group input-group-lg">
+									                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-check"></span></span>
+									                      <!--  <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> --> 
+									                      <select class="form-control"  ng-model="dono.donar_info.donorCenter">
+									                      	<option>--Center--</option>    
+									                        <option>Madhapur</option>
+									                        <option>Kukatpally</option>
+									                        <option>Ameerpet</option>
+									                        <option>Himayatnagar</option>
+									                        <option>Secunderabad</option>  
+									                        <option>Dilsukhnagar</option>
+									                        <option>Gachibowli</option>  
+									                        <option>Vizag</option> 
+						                                       
+									                      </select>
+									                   </div><br> 
+													</div>
+												</div>
+												
+												<nav aria-label="...">
+													<ul class="pager">
+														<!--  <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li> -->
+														<li class="next"><a data-toggle="tab" href="#bank"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+													</ul>
+												</nav>              
+											</div>
+							
+							
+										<!-- End of personal details -->
+										
+										<!-- Start of bank details -->                              
+											<div id="bank" class="tab-pane fade">
+												<div class="input-group input-group-lg">
+													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span>
+													<input type="text" class="form-control" placeholder="Account Holder Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetailsAccountHolderName">
+												</div> <br>                  
+												<div class="input-group input-group-lg">
+													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-home"></span></span>
+													<input type="text" class="form-control" placeholder="Bank Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetailsBankName">
+												</div> <br>           
+												<div class="input-group input-group-lg">
+													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-th-list"></span></span>
+													<input type="text" class="form-control" placeholder="Account No." aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetailsAccountNo">
+												</div> <br>     
+												<div class="input-group input-group-lg">
+													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-flag"></span></span>
+													<input type="text" class="form-control" placeholder="Branch" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetailsBranchName">
+												</div> <br>                         
+												<div class="input-group input-group-lg">
+													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-record"></span></span>
+													<input type="text" class="form-control" placeholder="IFSC Code" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetailsIFSCCode">
+												</div> <br>  
+												<div class="input-group input-group-lg">
+													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-record"></span></span>
+													<input type="text" class="form-control" placeholder="MICR" aria-describedby="sizing-addon1" ng-model="dono.donar_info.micr">
+												</div> <br>                       
+												<div class="input-group input-group-lg">
+													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-check"></span></span>
+													<!-- <input type="text" class="form-control" placeholder="First Name" aria-describedby="sizing-addon1"> -->
+													<select class="form-control" ng-model="dono.donar_info.bankDetailsAccountType">
+														<option>--Account Type--</option>
+														<option>SB</option>
+														<option>CA</option>
+														<option>SB-NRE</option>
+														<option>SB-NRO</option>
+														<option>Other</option>                      
+													</select>
+												</div> 
+												<ul class="pager">
+													<li class="previous"><a data-toggle="tab" href="#personal"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+													<li class="next"><a data-toggle="tab" href="#payment"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+												</ul>
+											</div>
+										<!-- End of bank details -->
+										
+									<!-- Start of payment details --> 
+									
+										<div id="payment"  class="tab-pane fade">
+											
+										<div class="input-group input-group-lg">
+													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+													<input type="date"  class="form-control" placeholder="Start date" aria-describedby="sizing-addon1" ng-model="dono.donar_info.paymentDetailsStartDate">
+												</div> <br>
+												
+												 <div class="input-group input-group-lg">
+													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+													<input type='date'  class="form-control" placeholder="End Date Date" ng-model="dono.donar_info.paymentDetailsEndDate">
+												</div> <br>
+												
+											
+												<div class="input-group input-group-lg">
+													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-usd"></span></span>
+													<input type="text" class="form-control" placeholder="Amount in Rupees" aria-describedby="sizing-addon1" ng-model="dono.donar_info.paymentDetailsAmountInRs">
+												</div> <br>
+												<div class="input-group input-group-lg">
+													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-usd"></span></span>
+													<input type="text" class="form-control" placeholder="comments" aria-describedby="sizing-addon1" ng-model="dono.donar_info.comments">
+												</div> <br>
+											
+											
+											
+												<div class="input-group input-group-lg">
+											      <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-check"></span></span>
+											           <!-- <input type="text" class="form-control"  placeholder="" aria-describedby="sizing-addon1"> -->
+									                      <select class="form-control" placeholder="Frequency" ng-model="dono.donar_info.paymentDetailsFrequency">
+									                      	<option>--Frequency--</option>    
+									                          <option>Daily</option>
+									                          <option>Weekly</option>
+									                          <option>Quarterly</option>
+									                          <option>Semi-Annualy</option>
+									                          <option>Yearly</option>
+									                          <option>Bi-Monthly</option>
+									                          <option>As and when Presented</option>
+									                      </select>
+											 	</div> <br> 
+											   <button type="submit" class="btn btn-primary" >Submit</button>
+											 		<!-- <button type="button"  class="btn btn-primary" value=Submit>Submit</button>  -->   
+												<ul class="pager">
+												<li class="previous"><a data-toggle="tab" href="#bank"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+												</ul>
+											</div>
+										<!-- End of payment details -->
+										</div>
+								</form>
+										
+										<!-- End of tab content -->
+								</div>
+							
+							<div class="col-xs-6 col-md-4"></div>
+									
+							</div>
+						</div>
+				<!-- End of container -->
+					</div>
+				</div>
+			</div>
+	</div>
+<!-- End of wrapper -->
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+    $("#menu-toggle").click(function(e){
+    	e.preventDefault();
+    	
+    $('#wrapper').toggleClass("menuDisplayed");	
+    });
+
+});
+</script>
+</body>
+</html>
