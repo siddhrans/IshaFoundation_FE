@@ -28,7 +28,47 @@ myApp.controller("loginController",['$log','$scope','localService','$http',funct
 	var url='http://localhost:6512/donar1/';
 	self.editUser = {};
 	
+	/* drop down validation */	
+	$scope.type = [{
+        id: "a",
+        value: "SB"
+    }, {
+        id: "b",
+        value: "CA"
+    },{
+    	id: "c",
+        value: "SB-NRE"
+    },{ 
+    	id: "d",
+        value: "SB-NR0"
+    },{
+	    id: "e",
+       value: "Other"
+}];
 	
+	$scope.amountFrequency = [{
+        id: "a",
+        value: "Daily"
+    }, {
+        id: "b",
+        value: "Weekly"
+    },{
+    	id: "c",
+        value: "Quarterly"
+    },{ 
+    	id: "d",
+        value: "Semi-Annually"
+    },{
+	    id: "e",
+        value: "Yearly"
+    },{
+        id: "f",
+        value: "Bi-Monthly"
+    },{
+        id: "g",
+        value: "As And When Presented"
+}];
+ 
 	
 	
 	self.register = function register(){
