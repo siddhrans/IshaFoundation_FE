@@ -29,6 +29,7 @@
 
 <link href="js/angular-bootstrap-toggle.min.css" rel="stylesheet">
 <script src="js/angular-bootstrap-toggle.min.js"></script>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
@@ -99,11 +100,9 @@
 								<div class="col-md-8" id="donorList">
 									<form>
 			      						<div class="input-group col-sm-4" style="float:left">
-			        						<input type="text" class="form-control" placeholder="Search">
+			        						<input type="text" class="form-control" placeholder="Search data here..." ng-model="SearchText">
 			        							<div class="input-group-btn">
-			          								<button class="btn btn-default" type="submit">
-			            								<i class="glyphicon glyphicon-search"></i>
-			         								</button>
+			          								
 			        							</div>
 			     						 </div>
 			     						 <div id="searchBar">
@@ -133,85 +132,52 @@
 						  			    		
 						  			    	</tr>
 						  			    	<tbody>
-						  			    	<tr ng-repeat="details in ctrl.DonorsList | orderBy : 'name'" >
+						  			    	<tr ng-repeat="details in ctrl.DonorsList | filter:SearchText">
 						  			    		<!-- <td>{{details.registrationUserid}}</td> -->
-						  			    		
-												<td ng-show="!ctrl.edit[details.consumercode]">{{details.donorfirstname +" " +details.donorlastname}}</td>
-						  			    		<td ng-show="!ctrl.edit[details.consumercode]">{{details.donormobile}}</td>
-						  			    		<td ng-show="!ctrl.edit[details.consumercode]">{{details.donoremail}}</td>
-						  			    		<td ng-show="!ctrl.edit[details.consumercode]">Rs .11111111</td>
-						  			    		<td ng-show="!ctrl.edit[details.consumercode]">{{details.createdonorstatus}}</td>
-											    <td ng-show="!ctrl.edit[details.consumercode]">
-											     
-											     <button type="button" class="btn btn-danger" ng-click="deleteEmployee(details)">View</button>
-											     <button type="button" class="btn btn-primary" ng-click="ctrl.edit[details.consumercode] = !ctrl.edit[details.consumercode]">Edit</button>
-											    </td>
-											 	<td ng-show="ctrl.edit[details.consumercode]">{{details.donorfirstname +" " +details.donorlastname}}</td>
-						  			    		<td ng-show="ctrl.edit[details.consumercode]">{{details.donormobile}}</td>
-						  			    		<td ng-show="ctrl.edit[details.consumercode]"><input type="text" ng-model="details.donoremail"></td>
-						  			    		<td ng-show="ctrl.edit[details.consumercode]">Rs .11111111111</td>
-						  			    		<td ng-show="ctrl.edit[details.consumercode]">
-						  			    		<select class="form-control" ng-model="details.createdonorstatus" >
-						  			    			<option value="ACTIVE">{{details.createdonorstatus}}</option>
-						  			    			<option value="IN-ACTIVE">In-Active</option>
-						  			    		</select>					  
-											    <td ng-show="ctrl.edit[details.consumercode]">
-											    <button type="button" class="btn btn-primary" ng-click="ctrl.update(details); ctrl.edit[details.consumercode] = !ctrl.edit[details.consumercode]">save</button>  
-											     <button type="button" class="btn btn-warning" ng-click="ctrl.edit[details.consumercode] = !ctrl.edit[details.consumercode]">undo</button>
-											      
-											    
-						  			    		
-<!-- 						  			    		<td id="tableData">
-						  			    			<ul>
-						  			    				<li style="padding-right: 16px;"><a href="#" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-eye-open" data-toggle="tooltip"  data-placement="bottom"  title="See"></i></a>
-						  			    				  Modal
-														  <div class="modal fade" id="myModal" role="dialog">
-														    <div class="modal-dialog">
-														    
-														      Modal content
-														      <div class="modal-content">
-														        <div class="modal-header">
-														          <button type="button" class="close" data-dismiss="modal">&times;</button>
-														          <h4 class="modal-title">Modal Header</h4>
-														        </div>
-														        <div class="modal-body">
-														        
-														          
-														        </div>
-														        <div class="modal-footer">
-														          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-														        </div>
-														      </div>
-														      
-														    </div>
-														  </div>
-						  			    				end of modal  ng-click="ctrl.edit(details.consumerCode)"
-						  			    				</li>
-						  			    				<li ><a href="#" data-toggle="modal" data-target="#myModal" ng-click="ctrl.transformStatus(input)" ><i class="glyphicon glyphicon-pencil" data-toggle="tooltip"  data-placement="bottom"  title="Edit" ></i></a>
-						  			    				
-						  			    				</li>
-						  			    				
-
-
-
-						  			    			</ul>
-						  			    		</td> -->
-						  			    	</tr>
-						  			    	</tbody>
-						  			    	<!-- <tr>
-						  			    		<td>ABC</td>
-						  			    		<td>123456789</td>
-						  			    		<td>abc@gmail.com</td>
-						  			    		<td>RS. 111111</td>
-						  			    		<td>ACTIVE</td>
-						  			    		<td id="tableData">
-						  			    			<ul>
-						  			    				<li style="padding-right: 11px;"><a href=""><i class="glyphicon glyphicon-eye-open" data-toggle="tooltip"  data-placement="bottom"  title="See"></i></a></li>
-						  			    				<li style="padding-right: 11px;"><a href=""><i class="glyphicon glyphicon-pencil" data-toggle="tooltip"  data-placement="bottom"  title="Edit"></i></a></li>
-						  			    				<li ><a href=""><i class="glyphicon glyphicon-remove" data-toggle="tooltip"  data-placement="bottom"  title="Delete"></i></a></li>
-						  			    			</ul>
+						  			    		<td ng-show="!ctrl.edit[details.consumerCode]">{{details.donorfirstname}}</td>
+						  			    		<td ng-show="!ctrl.edit[details.consumerCode]">{{details.donormobile}}</td>
+						  			    		<td ng-show="!ctrl.edit[details.consumerCode]">{{details.donoremail}}</td>
+						  			    		<td ng-show="!ctrl.edit[details.consumerCode]">Rs.{{details.paymentDetailsAmountInRs}}</td>
+						  			    		<td ng-show="!ctrl.edit[details.consumerCode]">{{details.createdonorstatus}}</td>
+						  			    		<td ng-show="!ctrl.edit[details.consumerCode]">
+						  			    			<button class="btn btn-warning" data-toggle="modal" data-target="#myModal">View</button>
+    												<button class="btn btn-primary" ng-click=" ctrl.edit[details.consumerCode] = !ctrl.edit[details.consumerCode]" >Edit</button>
+    												  <!-- Modal -->
+													  <div class="modal fade" id="myModal" role="dialog">
+													    <div class="modal-dialog">
+													    
+													      <!-- Modal content-->
+													      <div class="modal-content">
+													        <!-- <div class="modal-header">
+													          <button type="button" class="close" data-dismiss="modal">&times;</button>
+													          <h4 class="modal-title">Modal Header</h4>
+													        </div> -->
+													        <div class="modal-body">
+													          
+													        </div>
+													        <div class="modal-footer">
+													          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													        </div>
+													      </div>
+													      
+													    </div>
+													  </div>
 						  			    		</td>
-						  			    	</tr> -->
+						  			    		<td ng-show="ctrl.edit[details.consumerCode]">{{details.donorfirstname}}</td>
+						  			    		<td ng-show="ctrl.edit[details.consumerCode]">{{details.donormobile}}</td>
+						  			    		<td ng-show="ctrl.edit[details.consumerCode]">{{details.donoremail}}</td>
+						  			    		<td ng-show="ctrl.edit[details.consumerCode]">Rs.{{details.paymentDetailsAmountInRs}}</td>
+						  			    		<td ng-show="ctrl.edit[details.consumerCode]" >
+						  			    		<select class="form-control">
+						  			    			<option >{{details.createdonorstatus}}</option>
+						  			    			<option >In-Active</option>
+						  			    		</select>
+						  			    		</td>
+						  			    		<td ng-show="ctrl.edit[details.consumerCode]">
+						  			    			<button class="btn btn-success" ng-click="ctrl.update(details);ctrl.edit[details.consumerCode] = !ctrl.edit[details.consumerCode]" >Save</button>
+    												<button class="btn btn-default" ng-click=" ctrl.edit[details.consumerCode] = !ctrl.edit[details.consumerCode]" >Undo</button>
+						  			    		</td>
+											</tr>
 						  			    	
 						  			    </table>
 				  			
@@ -221,7 +187,7 @@
 							<div class="col-md-3">
 								<h3>This Month</h3>
 									<div id="block1">
-										<i class="fa fa-handshake-o" style="font-size: 35px;"></i>
+										<i class="fa fa-handshake-o" style="font-size: 35px;color: #00688B;"></i>
 										<P>166</P>
 										<h5>NEW DONOR'S</h5>
 									</div><br>

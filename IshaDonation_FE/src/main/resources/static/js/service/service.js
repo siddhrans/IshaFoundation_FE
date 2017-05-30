@@ -6,7 +6,6 @@ myApp.factory("localService",['$http','$log','$q',function($http,$log,$q){
 			fetchDonors : fetchDonors,
 			createDonor: createDonor,
 			update : update
-
 	};
 	return factory;
 	
@@ -58,8 +57,25 @@ myApp.factory("localService",['$http','$log','$q',function($http,$log,$q){
 	         );
 	     return deferred.promise;
 	 };
-	
-	 function update(DonorsList,ids){
+	function update(donar_info){
+		 var deferred = $q.defer();
+		 var Urll = 'http://localhost:6512/donar1/' + donar_info.consumerCode;
+		 $log.log(Urll);
+		 $http.put(Urll,donar_info)
+		 .then(function(response){
+			 $log.log("--------sucess---------");
+			 var data = response.data;
+			 return data;
+			/* deferred.resolve();*/
+		 },function(errResponse){
+			 $log.log("Error while creating Donor ");
+			 deferred.reject(errResponse);
+			 
+		 });
+		 return deferred.promise;
+	}
+	 
+	/* function update(DonorsList,ids){
 		 var deferred = $q.defer();
 		 $log.log("------updateeeee---------");
 		 var Urll = 'http://localhost:6512/donar1/' + ids;
@@ -75,7 +91,7 @@ myApp.factory("localService",['$http','$log','$q',function($http,$log,$q){
              deferred.reject(errResponse);
 		 })
 		 return deferred.promise;
-	 };
+	 };*/
 	  /* function updateDonor(donar_info){
 		 var deferred=$q.defer();
 		 console.log('-----------------updateDonor service---------------');

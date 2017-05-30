@@ -1,6 +1,6 @@
 'use strict';
 var myApp = angular.module("loginApp",[]);
-myApp.controller("loginController",['$log','$scope','localService','$http',function($log,$scope,localService,$http){
+myApp.controller("loginController",['$log','$scope','localService','$http',function($log,$scope,localService,$httpa){
 	$log.log("------------Controller-----------");
 	
 	
@@ -19,35 +19,44 @@ myApp.controller("loginController",['$log','$scope','localService','$http',funct
 	
 	self.registerd = [];
 	self.SuccessMessage='';
-	self.ErrorMessage='';
+
 	self.DonorsList = [];
 	self.successMessage = '';
     self.errorMessage = '';
 	self.onlyNumbers = /^\d+([,.]\d+)?$/;
 	
 	var url='http://localhost:6512/donar1/';
-	self.edits = {};
+	self.editUser = {};
 	
-	var consumercode = self.DonorsList.consumercode;
 	
 	
 	
 	self.register = function register(){
 		$log.log("-----Register Function-----");
-		localService.register(self.registerData)
-		.then(
-			function(d){
-				$log.log(self.registerData);
-				self.registerd = d;
-				self.SuccessMessage='New User Registerd SuccessFully';
-				self.ErrorMessage='';
-				//$log.log(self.registerd);
-			},	
-			function(errResponse){
-				self.ErrorMessage='Error while Creating';
-				$log.log("--------Error in Controller----");
-			}
-		);
+		$log.log(self.registerData.registrationPasscode+" andd    "+self.registerData.registrationConfirmPasscode);
+		if(self.registerData.registrationPasscode == self.registerData.registrationConfirmPasscode){
+			localService.register(self.registerData)
+			.then(
+				function(d){
+					$log.log(self.registerData);
+					self.registerd = d;
+					self.SuccessMessage='New User Registerd SuccessFully';
+					alert("registered SuccessFully");
+					
+					self.ErrorMessage='';
+					//$log.log(self.registerd);
+				},	
+				function(errResponse){
+					self.ErrorMessage='Error while Creating';
+					$log.log("--------Error in Controller----");
+				}
+			);
+		}else {
+			self.ErrorMessage="Passwords didn't match!! Please try again.";
+			/*window.location.href="http://localhost:6512/login.html";*/
+			$log.log("Error while Registering");
+		}
+		
 	};
 
 	self.fetchDonors = function fetchDonors(){
@@ -88,58 +97,28 @@ myApp.controller("loginController",['$log','$scope','localService','$http',funct
                  }
              );
      };
-     self.update = function update(DonorsList,consumerCode){ 
-    	 $log.log(DonorsList);
-    	 $log.log("aaaaaaaaa"+DonorsList.consumerCode);
-    	 var ids =  DonorsList.consumerCode;
-    	 localService.update(DonorsList,ids)
-    	 .then(
-    	function(d){
-    		 $log.log("************");
-    		 self.donar_info = DonorsList;
-    		 self.fetchDonors();
-    		 $log.log(d);
-    		 self.registerd = data;
-    	 },
-    	 function(error){
-    		 $log.log("*****Error*******");
+     self.update = function update(donar_info){
+    	 $log.log(donar_info);
+    	 localService.update(donar_info)
+    	 .then(function(response){
+    		 $log.log(response.data);
+    		 self.DonorsList = response.data;
+    	 },function(erresponse){
+    		 $log.log("Error while upadting"+erresponse);
+    		 
     	 });
-     };
-	  
-     self.edit = function edit(id){
-    	 console.log('id to be edited', id);
-         for(var i = 0; i < self.DonorsList.length; i++){
-             if(self.DonorsList[i].registrationUserid === id) {
-                 self.edits = angular.copy(self.DonorsList[i]);
-                 break;
-             }
-         }
     	 
-     };
-	/* function updateDonor() {
-		 console.log('update donor');
-		 console.log(self.donar_info);
-		 localService.updateDonor(self.donar_info)
-		   .then(
-	          function (response){
-	        	  console.log('donor updated successfully');
-	        	  self.successMessage = 'Donor updated successfully';
-	          },
-	          function(errResponse) {
-	        	  console.error('Error while creating donor');
-	          }
-				   );
-	 };
-	 */
-         
-     /*$scope.getTemplate = function (DonorsList) {
-    	 if (DonorsList.empID === $scope.selected.empID){
-    	  return 'edit';
-    	 }
-    	 else return 'display';
-    	};*/
-  
-	
+     }
+     
+	self.edit = function edit(id){
+		$log.log("The id to be Edited"+id);
+		for(var i=0; i<self.DonorsList.length;i++){
+			if(self.DonorsList[i].consumerCode == id){
+			self.donar_info = angular.copy(self.DonorsList[i]);
+			break;
+			}
+		}
+	}
 	
 }]);
 /*myApp.directive("matchPassword", function () {

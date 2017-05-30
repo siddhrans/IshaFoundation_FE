@@ -37,10 +37,10 @@ body{
 	margin-bottom:15px;
 }
 input.ng-invalid.ng-dirty{
-	border:1px solid red;
+	border-bottom:1px solid red;
 }
 input.ng-valid{
-	border:1px solid #93DB70;
+	border-bottom:1px solid #93DB70;
 }
 /* end of login-form */
 
@@ -280,6 +280,16 @@ font-size: 23px;
     background: #fff;
 
 }
+#block1 p{
+	    font-size: 30px;
+    color: #8B864E;
+}
+
+#block1 h5{
+	font-family: 'Source Sans Pro';
+    color: #66CD00;
+    font-weight: 600;
+}
 #block2{
 	border: 1px solid #ddd;
       width: 236px;
@@ -289,6 +299,15 @@ font-size: 23px;
     background: #87CEEB;
 
 }
+#block2 p{
+	    font-size: 30px;
+    color: rgba(255, 255, 255, 1);
+}
+#block2 h5{
+	    font-family: 'Source Sans Pro';
+    font-weight: 600;
+    color: #FFFFCC;
+}
 #block3{
 	border: 1px solid #ddd;
       width: 236px;
@@ -297,7 +316,16 @@ font-size: 23px;
     padding-top: 40px;
     background: #93DB70;
 }
-
+#block3 p{
+	    font-size: 30px;
+    color: rgba(90, 108, 138, 1);
+}
+#block3 h5{
+	font-family: 'Source Sans Pro';
+    font-weight: 600;
+    color: rgba(22, 93, 136, 1);
+	
+}
 /*Create Donor*/
 /* Success page start */
 #myTab li{
