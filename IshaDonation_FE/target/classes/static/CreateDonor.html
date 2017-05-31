@@ -26,6 +26,7 @@
 <script type="text/javascript" src="js/controller/controller.js"></script>
 <script type="text/javascript" src="js/service/service.js"></script>
 
+
 <!-- css files -->
 
 <link rel="stylesheet" href="css/index.css">
@@ -59,10 +60,10 @@
 			<div  id="sidebar-wrapper">
 				<ul class="sidebar-nav">
 							<li style="margin-top: -36px;color:#fff;">MENU <i class="glyphicon glyphicon-th" style="margin-left: 82px;font-size: 20px;"></i></li>
-							<li ><a href="#" >DASHBOARD</a></li>
-				  			<li class="active"><a href="#">CREATE DONOR</a></li>
-				  			<li><a href="#">BULK OPERATIONS</a></li>
-				  			<li><a href="#">REPORTS</a></li>
+							<li ><a href="dashboard.html" >DASHBOARD</a></li>
+				  			<li class="active"><a href="CreateDonor.html">CREATE DONOR</a></li>
+				  			<li><a href="">BULK OPERATIONS</a></li>
+				  			<li><a href="">REPORTS</a></li>
 				</ul>
 			</div>
 			<div id="sidebar-wrapper2" class="nav2">
@@ -98,7 +99,7 @@
 											<li><a data-toggle="tab" href="#payment">Payment Details</a></li>
 										</ul>
 										<!-- Start of tab content -->
-									<form ng-submit="dono.createDonor();">
+									<form name="create" ng-submit="dono.createDonor();" id="donorCount">
 										<div class="tab-content">
 										<!-- Start of personal details -->
 											<div id="personal" class="tab-pane fade in active">
@@ -106,8 +107,11 @@
 													<div class="col-md-6">
 														<div class="input-group input-group-lg">
 															<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span>
-															<input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donorfirstname">
-															 
+															<input type="text" class="form-control" name="fname" placeholder="First Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donorfirstname" required ng-minlength="3" ng-maxlength="40">
+															  <span style="color:red" ng-show="create.fname.$dirty && create.fname.$error.required">The name is required.</span>
+								                              <span style="color:red" ng-show="create.fname.$dirty && create.fname.$error.minlength">Account Holder Name is too short.</span>
+						                                      <span style="color:red" ng-show="create.fname.$dirty && create.fname.$error.maxlength">Account Holder Name is too long.</span>
+													
 														</div> <br>
 												
 														<div class="input-group input-group-lg">
@@ -117,12 +121,17 @@
 												
 														<div class="input-group input-group-lg">
 															<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-envelope"></span></span>
-															<input type="text" class="form-control" placeholder="Email" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donoremail">
+															<input type="email" class="form-control" name="email" placeholder="Email" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donoremail">
+														    <span style="color:red" ng-show="create.email.$dirty && create.email.$invalid">
+									                        <span ng-show="create.email.$error.required">Email is required.</span><br>
+                                                            <span ng-show="create.email.$error.email">Invalid email address.</span>
+                                                           </span>  
 														</div><br>
 												
 														<div class="input-group input-group-lg">
 															<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-phone"></span></span>
-															<input type="text" class="form-control" placeholder="Mobile" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donormobile">
+															<input type="text" class="form-control" name="mobile" placeholder="Mobile" aria-describedby="sizing-addon1" ng-model="dono.donar_info.donormobile" required ng-minlenght="10" ng-maxlenght="10" ng-pattern="/^[7-9][0-9]{9}$/">
+														     <span style="color:red" ng-show="create.mobile.$dirty && create.mobile.$error.pattern">Please enter valid number</span>
 														</div><br>
 														 <div class="input-group input-group-lg">
 											                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-road"></span></span>
@@ -133,17 +142,18 @@
 														<div class="input-group input-group-lg">
 															<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-asterisk"></span></span>
 															<!-- <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> -->
-															<select class="form-control" ng-model="dono.donar_info.donorRegion">
-										                      	<option>--Region--</option>    
+															<select class="form-control" name="region" ng-model="dono.donar_info.donorRegion" required>
+										                      	<option value="" disabled>--Region--</option>    
 										                        <option>Andhra Pradesh</option>
 										                        <option>Telangana</option>
 									                      	</select>
+									                      	<span style="color:red" ng-show="create.region.$dirty && create.region.$error.required">Region</span>
 														</div> <br>
 									                   <div class="input-group input-group-lg">
 										                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-tower"></span></span>
 										                      <!-- <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> -->
 										                      <select class="form-control" ng-model="dono.donar_info.donorCity">
-										                      	<option>--City--</option>    
+										                      	<option value="" disabled>--City--</option>    
 										                        <option>Hyderabad</option>
 										                        <option>Vijayawada</option>
 										                        <option>Vizag</option>
@@ -153,7 +163,7 @@
 									                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-bookmark"></span></span>
 									                      <!-- <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> -->
 									                      <select class="form-control" ng-model="dono.donar_info.donorState">
-									                      	<option>--State--</option>    
+									                      	<option value="" disabled>--State--</option>    
 									                        <option>Andhra Pradesh</option>
 									                        <option>Telangana</option>
 									                      </select>
@@ -162,7 +172,7 @@
 									                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-check"></span></span>
 									                      <!--  <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> --> 
 									                      <select class="form-control"  ng-model="dono.donar_info.donorCenter">
-									                      	<option>--Center--</option>    
+									                      	<option value="" disabled>--Center--</option>    
 									                        <option>Madhapur</option>
 									                        <option>Kukatpally</option>
 									                        <option>Ameerpet</option>
@@ -192,7 +202,10 @@
 											<div id="bank" class="tab-pane fade">
 												<div class="input-group input-group-lg">
 													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span>
-													<input type="text" class="form-control" placeholder="Account Holder Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetailsAccountHolderName">
+													<input type="text" class="form-control" name="Aname" placeholder="Account Holder Name" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetailsAccountHolderName" required ng-minlength="3" ng-maxlength="40">
+												      <span style="color:red" ng-show="create.Aname.$dirty && create.Aname.$error.required">The Account Holder Name is required.</span><br>
+						                              <span style="color:red" ng-show="create.Aname.$dirty && create.Aname.$error.minlength">Account Holder Name is too short.</span>
+						                               <span style="color:red" ng-show="create.Aname.$dirty && create.Aname.$error.maxlength">Account Holder Name is too long.</span>
 												</div> <br>                  
 												<div class="input-group input-group-lg">
 													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-home"></span></span>
@@ -200,7 +213,10 @@
 												</div> <br>           
 												<div class="input-group input-group-lg">
 													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-th-list"></span></span>
-													<input type="text" class="form-control" placeholder="Account No." aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetailsAccountNo">
+													<input type="text" class="form-control" name="Anmbr" placeholder="Account No." aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetailsAccountNo" required ng-minlength="10" ng-maxlength="18">
+												     <span style="color:red" ng-show="create.Anmbr.$dirty && create.Anmbr.$error.required">Account No is Required</span><br>
+						                             <span  style="color:red" ng-show="create.Anmbr.$dirty && create.Anmbr.$error.minlength">Account number is too short</span>
+						                             <span  style="color:red" ng-show="create.Anmbr.$dirty && create.Anmbr.$error.maxlength">Account number is too long</span>
 												</div> <br>     
 												<div class="input-group input-group-lg">
 													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-flag"></span></span>
@@ -208,24 +224,28 @@
 												</div> <br>                         
 												<div class="input-group input-group-lg">
 													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-record"></span></span>
-													<input type="text" class="form-control" placeholder="IFSC Code" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetailsIFSCCode">
+													<input type="text" class="form-control" name="ifsc" placeholder="IFSC Code" aria-describedby="sizing-addon1" ng-model="dono.donar_info.bankDetailsIFSCCode" ng-required="false" ng-minlength="11" ng-maxlength="11">
+												    <span style="color:red" ng-show="create.ifsc.$dirty && create.ifsc.$error.required"></span>
+						                            <span  style="color:red" ng-show="((create.ifsc.$error.minlength || create.ifsc.$error.maxlength) && create.ifsc.$dirty)">IFSC code must be 11 digits</span>
 												</div> <br>  
 												<div class="input-group input-group-lg">
 													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-record"></span></span>
-													<input type="text" class="form-control" placeholder="MICR" aria-describedby="sizing-addon1" ng-model="dono.donar_info.micr">
+													<input type="text" class="form-control" name="micr" placeholder="MICR" aria-describedby="sizing-addon1" ng-model="dono.donar_info.micr" ng-required="false" ng-minlength="9" ng-maxlength="9" ng-pattern="/^\d+([,.]\d+)?$/">
+												    <span style="color:red" ng-show="create.micr.$dirty && create.micr.$error.required"></span>
+						                            <span style="color:red" ng-show="create.micr.$dirty && create.micr.$error.pattern">MICR should be digits</span><br>
+						                            <span style="color:red" ng-show="((create.micr.$error.minlength || create.micr.$error.maxlength) && create.micr.$dirty) ">MICR must be 9 digits</span>
 												</div> <br>                       
+											
 												<div class="input-group input-group-lg">
 													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-check"></span></span>
 													<!-- <input type="text" class="form-control" placeholder="First Name" aria-describedby="sizing-addon1"> -->
-													<select class="form-control" ng-model="dono.donar_info.bankDetailsAccountType">
-														<option>--Account Type--</option>
-														<option>SB</option>
-														<option>CA</option>
-														<option>SB-NRE</option>
-														<option>SB-NRO</option>
-														<option>Other</option>                      
+													<select class="form-control" name="account_type" ng-model="dono.donar_info.bankDetailsAccountType" required>
+														 <option value="" disabled>--Account Type--</option>
+														 <option ng-repeat="v in type" value="{{v.value}}" title="{{v.value}}">{{v.value}}</option>                   
 													</select>
-												</div> 
+													<span style="color:red" ng-show="create.account_type.$dirty && create.account_type.$error.required">Account Type is Required</span>
+												</div>
+												
 												<ul class="pager">
 													<li class="previous"><a data-toggle="tab" href="#personal"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
 													<li class="next"><a data-toggle="tab" href="#payment"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
@@ -239,18 +259,23 @@
 											
 										<div class="input-group input-group-lg">
 													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-													<input type="date"  class="form-control" placeholder="Start date" aria-describedby="sizing-addon1" ng-model="dono.donar_info.paymentDetailsStartDate">
+													<input type="date"  class="form-control" name="startdate" placeholder="Start date" aria-describedby="sizing-addon1" ng-click="dono.validateDates();" ng-model="dono.donar_info.paymentDetailsStartDate" ng-required="true">
+												    <span style="color:red" ng-show="create.startdate.$error.required && create.startdate.$dirty">Start date is Required</span>
 												</div> <br>
 												
 												 <div class="input-group input-group-lg">
 													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-													<input type='date'  class="form-control" placeholder="End Date Date" ng-model="dono.donar_info.paymentDetailsEndDate">
+													<input type="date"  class="form-control" name="enddate" placeholder="End Date Date" aria-describedby="sizing-addon1" ng-click="dono.validateDates();" ng-model="dono.donar_info.paymentDetailsEndDate" ng-required="true">
+												      <span style="color:red" ng-show="create.startDate.$error.endBeforeStart">End date must be on or after start date.</span>
+                                                       <span style="color:red" ng-show="create.startdate.$error.invalidDate || create.enddate.$error.invalidDate">Check dates for validity</span>
+                                                       <span style="color:red" ng-show="create.enddate.$error.required && create.enddate.$dirty">End date is Required</span>
+                                                      
 												</div> <br>
-												
-											
 												<div class="input-group input-group-lg">
 													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-usd"></span></span>
-													<input type="text" class="form-control" placeholder="Amount in Rupees" aria-describedby="sizing-addon1" ng-model="dono.donar_info.paymentDetailsAmountInRs">
+													<input type="text" class="form-control" name="amount" placeholder="Amount in Rupees" aria-describedby="sizing-addon1" ng-model="dono.donar_info.paymentDetailsAmountInRs" required ng-pattern="/^\d+([,.]\d+)?$/" ng-maxlength="13">
+												    <span style="color:red" ng-show="create.amount.$dirty && create.amount.$error.pattern">It should be numbers</span><br>
+						                            <span style="color:red" ng-show="create.amount.$dirty && create.amount.$error.maxlength">It is too long</span>
 												</div> <br>
 												<div class="input-group input-group-lg">
 													<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-usd"></span></span>
@@ -258,19 +283,13 @@
 												</div> <br>
 											
 											
-											
 												<div class="input-group input-group-lg">
 											      <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-check"></span></span>
 											           <!-- <input type="text" class="form-control"  placeholder="" aria-describedby="sizing-addon1"> -->
-									                      <select class="form-control" placeholder="Frequency" ng-model="dono.donar_info.paymentDetailsFrequency">
-									                      	<option>--Frequency--</option>    
-									                          <option>Daily</option>
-									                          <option>Weekly</option>
-									                          <option>Quarterly</option>
-									                          <option>Semi-Annualy</option>
-									                          <option>Yearly</option>
-									                          <option>Bi-Monthly</option>
-									                          <option>As and when Presented</option>
+									                      <select class="form-control" value="frequency" placeholder="Frequency" ng-model="dono.donar_info.paymentDetailsFrequency" required>
+									                      	<option value="" disabled>--Frequency--</option>    
+									                          <option ng-repeat="t in amountFrequency" value="{{t.value}}" title="{{t.value}}">{{t.value}}</option>
+									                          
 									                      </select>
 											 	</div> <br> 
 											   <button type="submit" class="btn btn-primary" >Submit</button>

@@ -28,6 +28,7 @@ myApp.controller("loginController",['$log','$scope','localService','$http',funct
 	var url='http://localhost:6512/donar1/';
 	self.editUser = {};
 	
+	
 	/* drop down validation */	
 	$scope.type = [{
         id: "a",
@@ -70,7 +71,6 @@ myApp.controller("loginController",['$log','$scope','localService','$http',funct
 }];
  
 	
-	
 	self.register = function register(){
 		$log.log("-----Register Function-----");
 		$log.log(self.registerData.registrationPasscode+" andd    "+self.registerData.registrationConfirmPasscode);
@@ -106,6 +106,8 @@ myApp.controller("loginController",['$log','$scope','localService','$http',funct
 				function(fetchResponse){
 					$log.log("successfully fetched data");
 					self.DonorsList = fetchResponse;
+					self.OldDonors = self.DonorsList.length;
+					$log.log(self.OldDonors);
 					$log.log(self.DonorsList);
 			
 		},function(errResponse){
@@ -159,24 +161,8 @@ myApp.controller("loginController",['$log','$scope','localService','$http',funct
 			}
 		}
 	}
+	self.selectContact = function(index){
+		self.selectedContact = self.DonorsList[index];
+	}
 	
 }]);
-/*myApp.directive("matchPassword", function () {
-    return {
-        require: "ngModel",
-        scope: {
-            otherModelValue: "=matchPassword"
-        },
-        link: function(scope, element, attributes, ngModel) {
-            console.log("Passwordsssssssssss");
-        	ngModel.$validators.matchPassword = function(modelValue) {
-        		console.log(scope.otherModelValue);
-                return modelValue == scope.otherModelValue;
-            };
-            scope.$watch("otherModelValue", function() {
-            	console.log(scope.otherModelValue);
-            	ngModel.$validate();
-            });
-        }
-    };
-}); */
