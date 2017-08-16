@@ -1,53 +1,99 @@
 'use strict';
-var myApp = angular.module("loginApp",[]);
-myApp.controller("loginController",['$log','$scope','localService','$http',function($log,$scope,localService,$http){
+var myApp = angular.module("loginApp",['ngRoute','ngResource','angularUtils.directives.dirPagination']);
+myApp.controller("loginController",['$log','$scope','localService','fileUpload','$http','$resource','$window',function($log,$scope,localService,fileUpload,$http,$resource,$window){
 	$log.log("------------Controller-----------");
 	
 	
 	var self = this;
-	self.registerData = {registrationFirstName:'',registrationLastName:'',registrationEmail:'',
-					registrationMobile:'',registrationPasscode:'',registrationConfirmPasscode:''};
+	self.registerData = {userName:'',name:'',email:'',
+			phoneNo:'',password:'',confirmPassword:''};
 	
-	self.donar_info={ consumerCode:'',donorfirstname:"",donorlastname:"",donoremail:"",donormobile:"",donorAddress:"",
-			donorRegion:"",donorCity:"",donorState:"",donorCenter:"",
-			bankDetailsAccountHolderName:"",bankDetailsBankName:'',bankDetailsBranchName:"",bankDetailsAccountNo:"",
-			bankDetailsIFSCCode:"",micr:"",bankDetailsAccountType:"",
-			paymentDetailsStartDate:"",paymentDetailsEndDate:"",paymentDetailsAmountInRs:"",
-			paymentDetailsFrequency:"",comments:"",createdonorstatus:''};
+	self.donor_info={donorName:"",donorPhoneNumber:"",donorEmail:"",donorRegion:"",donorState:"",donorCity:"",donorcenter:"",bankAccountholderName:"",
+	         bankName:"",bankBranch:"",bankAccountNumber:"",bankMICR:"",bankIfscCode:"",bankAccountType:"",donationStartDate:"",
+	         donationEndDate:"",donationFrequency:"",donorComments:"",amount:""};
 	
 	
 	
-	self.registerd = [];
+/*	self.registerd = [];*/
 	self.SuccessMessage='';
-	self.ErrorMessage='';
+	//self.data='';
+   // self.file={};
 	self.DonorsList = [];
 	self.successMessage = '';
     self.errorMessage = '';
 	self.onlyNumbers = /^\d+([,.]\d+)?$/;
 	
-	var url='http://localhost:6512/donar1/';
-	self.edits = {};
+	/*var url='http://localhost:6512/donor1/';*/
+	self.editUser = {};
+	self.logs={phoneNo:'',password:''};
+	self.filename='';
+	//self.selectedUploadFile;
+	var today = new Date();
+/*	self.logedUser=[];*/
+
+	/* drop down validation */	
+	$scope.type = [{
+        id: "a",
+        value: "SB"
+    }, {
+        id: "b",
+        value: "CA"
+    },{
+    	id: "c",
+        value: "SB-NRE"
+    },{ 
+    	id: "d",
+        value: "SB-NR0"
+    },{
+	    id: "e",
+       value: "Other"
+    }];
 	
-	var consumercode = self.DonorsList.consumercode;
-	
-	
+	$scope.amountFrequency = [{
+        id: "a",
+        value: "Daily"
+    }, {
+        id: "b",
+        value: "Weekly"
+    },{
+    	id: "c",
+        value: "Quarterly"
+    },{ 
+    	id: "d",
+        value: "Semi-Annually"
+    },{
+	    id: "e",
+        value: "Yearly"
+    },{
+        id: "f",
+        value: "Bi-Monthly"
+    },{
+        id: "g",
+        value: "As And When Presented"
+    }];
+ 
 	
 	self.register = function register(){
 		$log.log("-----Register Function-----");
+		if(self.registerData.password == self.registerData.confirmPassword){
 		localService.register(self.registerData)
-		.then(
-			function(d){
-				$log.log(self.registerData);
-				self.registerd = d;
-				self.SuccessMessage='New User Registerd SuccessFully';
-				self.ErrorMessage='';
-				//$log.log(self.registerd);
-			},	
-			function(errResponse){
-				self.ErrorMessage='Error while Creating';
-				$log.log("--------Error in Controller----");
-			}
-		);
+			.then(
+				function(d){
+					self.registerd = d;
+					self.SuccessMessage='New User Registerd SuccessFully';
+					window.location.href="http://localhost:8080/index.html#!/dashboard";
+					self.ErrorMessage='';
+				},	
+				function(errResponse){
+					self.ErrorMessage='Error while Creating!Please try again later';
+				}
+			);
+		}else {
+			self.ErrorMessage="Passwords didn't match!! Please try again.";
+			window.location.href="http://localhost:8080/login.html";
+			$log.log("Error while Registering");
+		}
+		
 	};
 
 	self.fetchDonors = function fetchDonors(){
@@ -57,11 +103,11 @@ myApp.controller("loginController",['$log','$scope','localService','$http',funct
 				function(fetchResponse){
 					$log.log("successfully fetched data");
 					self.DonorsList = fetchResponse;
-					$log.log(self.DonorsList);
+					self.OldDonors = self.DonorsList.length;
 			
 		},function(errResponse){
 			$log.log("Error while fetching");
-			alert("Error while fetching");
+			/*alert("Error while fetching");*/
 		})
 		
 	};
@@ -69,95 +115,167 @@ myApp.controller("loginController",['$log','$scope','localService','$http',funct
 	
 	
 	self.createDonor =  function createDonor() {
-         console.log('create donor');
-         
-         console.log(self.donar_info);
-         localService.createDonor(self.donar_info)
-             .then(
-                 function (response) {
-                     console.log('donor created successfully');
-                     self.successMessage = 'donor created successfully';
-                     self.errorMessage='';
-                     self.done = true;
-                  /*   self.user={};*/
-                 },
-                 function (errResponse) {
-                     console.error('Error while creating donor');
-                  /*   self.errorMessage = 'Error while creating donor:' + errResponse.data.errorMessage;
-                     self.successMessage='';*/
-                 }
-             );
+        console.log('create donor');
+       
+        console.log(self.donor_info);
+        localService.createDonor(self.donor_info)
+            .then(
+                function (response) {
+                    console.log('donor created successfully');
+                    self.successMessage = 'donor created successfully';
+                    alert('Donor Created successfully');
+                    window.location.href="#!SuccessPage"; 
+                    self.reload(); 
+                    self.errorMessage='';
+                    self.done = true;
+                 /*   self.user={};*/
+                },
+                function (errResponse) {
+                    console.error('Error while creating donor');
+                    alert('Error while creating Donor');
+                 
+                 /*   self.errorMessage = 'Error while creating donor:' + errResponse.data.errorMessage;
+                    self.successMessage='';*/
+                }
+            );
+    };
+    self.update = function update(id){
+    	var   List = $resource("http://localhost:8080/updatedonor/:id",{},{save:{method:'PUT',params:{id:'@id'}}});
+    	 //var index = self.DonorsList[index];
+    	 var donors = {};
+    	 donors.donorName = self.selectedContact.donorName;
+    	 donors.donorPhoneNumber=self.selectedContact.donorPhoneNumber;
+    	 donors.donorEmail=self.selectedContact.donorEmail;
+    	/* donors.donorRefName1=self.selectedContact.donorRefName1;
+    	 donors.donorRefName2=self.selectedContact.donorRefName2;*/
+    	 donors.donorRegion=self.selectedContact.donorRegion;
+    	 donors.donorState=self.selectedContact.donorState;
+    	 donors.donorCity=self.selectedContact.donorCity;
+    	 donors.donorcenter=self.selectedContact.donorcenter;
+    	 donors.bankAccountholderName=self.selectedContact.bankAccountholderName;
+    	 donors.bankName=self.selectedContact.bankName;
+    	 donors.bankBranch=self.selectedContact.bankBranch;
+    	 donors.bankAccountNumber=self.selectedContact.bankAccountNumber;
+    	 donors.bankMICR=self.selectedContact.bankMICR;
+    	 donors.bankIfscCode=self.selectedContact.bankIfscCode;
+    	 donors.bankAccountType=self.selectedContact.bankAccountType;
+    	 donors.donationStartDate=self.selectedContact.donationStartDate;	 
+    	 donors.donationEndDate=self.selectedContact.donationEndDate;
+    	 donors.donationFrequency=self.selectedContact.donationFrequency;
+/*    	 donors.createdonordate=self.selectedContact.createdonordate; */
+    	 donors.amount=self.selectedContact.amount;
+    	 donors.donorComments=self.selectedContact.donorComments;
+/*    	 donors.createdonordate = today.getDate();
+  	     donors.creatorName = "sharath"; */
+    	 self.DonorsList[self.selectedContact] = donors;
+    	 List.save({id:self.selectedContact.donorId},donors);
+    	 $log.log("successfully saved"); 
      };
-     self.update = function update(DonorsList,consumerCode){ 
-    	 $log.log(DonorsList);
-    	 $log.log("aaaaaaaaa"+DonorsList.consumerCode);
-    	 var ids =  DonorsList.consumerCode;
-    	 localService.update(DonorsList,ids)
-    	 .then(
-    	function(d){
-    		 $log.log("************");
-    		 self.donar_info = DonorsList;
-    		 self.fetchDonors();
-    		 $log.log(d);
-    		 self.registerd = data;
-    	 },
-    	 function(error){
-    		 $log.log("*****Error*******");
-    	 });
-     };
-	  
-     self.edit = function edit(id){
-    	 console.log('id to be edited', id);
-         for(var i = 0; i < self.DonorsList.length; i++){
-             if(self.DonorsList[i].registrationUserid === id) {
-                 self.edits = angular.copy(self.DonorsList[i]);
-                 break;
-             }
-         }
-    	 
-     };
-	/* function updateDonor() {
-		 console.log('update donor');
-		 console.log(self.donar_info);
-		 localService.updateDonor(self.donar_info)
-		   .then(
-	          function (response){
-	        	  console.log('donor updated successfully');
-	        	  self.successMessage = 'Donor updated successfully';
-	          },
-	          function(errResponse) {
-	        	  console.error('Error while creating donor');
-	          }
-				   );
-	 };
-	 */
-         
-     /*$scope.getTemplate = function (DonorsList) {
-    	 if (DonorsList.empID === $scope.selected.empID){
-    	  return 'edit';
-    	 }
-    	 else return 'display';
-    	};*/
-  
+     
+	self.edit = function edit(id){
+		$log.log("The id to be Edited"+id);
+		for(var i=0; i<self.DonorsList.length;i++){
+			if(self.DonorsList[i].consumerCode == id){
+			self.donor_info = angular.copy(self.DonorsList[i]);
+			break;
+			}
+		}
+	};
+	self.selectContact = function(donorId){
+		console.log('index block');
+		console.log(donorId);
+		self.selectedContact = self.DonorsList[donorId];
+		/*$log.log( self.selectedContact);*/
+		self.StartDate = new Date(self.selectedContact.donationStartDate);
+		self.EndDate = new Date(self.selectedContact.donationEndDate);
+	};
 	
+	self.login=function login(){
+		$log.log(self.logs);
+		localService.login(self.logs)
+		.then(function(d){
+			self.logedUser = d;
+			window.location.href="http://localhost:8080/index.html#!/dashboard";
+		},function(error){
+			$log.log("Error loging in controller");
+			alert("Unable to log-in");
+		});
+		
+	};
+	self.reload = function reload(){
+		$log.log("page is loading");
+		$window.location.reload();
+	};
 	
+	self.userdownload = function(){
+		var downloadPath = 'http://localhost:8080/downloadxls';
+		window.open(downloadPath, '_blank','')
+	};
+	self.monthly_remittances = function(){
+		var downloadPath = '';
+		window.open(downloadPath, '_blank','')
+	};
+	
+	self.file = {};
+	self.uploadFile = function(){
+	console.log(self.file);
+	console.log('service');
+	var uploadurl  = 'http://localhost:8080/uploadxls';
+	fileUpload.post(uploadurl, self.file);
+	}; 
+	
+	/*self.file = {};
+	self.uploadfile = function() {
+	console.log('self.file', self.file);
+	fileUpload.post(self.file);
+	}; */
 }]);
-/*myApp.directive("matchPassword", function () {
+
+myApp.directive('fileModel', ['$parse', function ($parse) {
+	console.log('hiiii');
     return {
-        require: "ngModel",
-        scope: {
-            otherModelValue: "=matchPassword"
-        },
-        link: function(scope, element, attributes, ngModel) {
-            console.log("Passwordsssssssssss");
-        	ngModel.$validators.matchPassword = function(modelValue) {
-        		console.log(scope.otherModelValue);
-                return modelValue == scope.otherModelValue;
-            };
-            scope.$watch("otherModelValue", function() {
-            	console.log(scope.otherModelValue);
-            	ngModel.$validate();
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            console.log(attrs.fileModel);
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
             });
         }
     };
-}); */
+}]); 
+
+myApp.config(function($routeProvider){
+	$routeProvider
+/*	.when("/",{
+		templateUrl : "login.html"
+	})*/
+	.when("/dashboard",{
+		templateUrl : "dashboard.html"
+	})
+	.when("/donor_info",{
+		templateUrl : "donor_info.html"
+		
+	})
+	.when("/CreateDonor",{
+		templateUrl : "CreateDonor.html"
+	})
+	.when("/ViewDonor",{
+		templateUrl : "ViewDonor.html"
+	})
+	.when("/SuccessPage",{
+		templateUrl : "SuccessPage.html"
+	})
+	.when("/EditDonor",{
+		templateUrl : "EditDonor.html"
+	})
+	.when("/BulkDonor",{
+		templateUrl : "BulkDonor.html"
+	})
+	.when("/Reports",{
+		templateUrl : "Reports.html"
+	})
+});

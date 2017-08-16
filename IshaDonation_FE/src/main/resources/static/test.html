@@ -5,10 +5,10 @@
 <div class="col-md-10">
       <div class="layout">
         <ul>
-         <li class="personal"><a href="#PersonalInformation">Personal information</a></li>
-         <li class="bank"><a href="#BankDetails">Bank Details</a></li>
-         <li class="payment"><a href="#PaymentDetails">Payment Details</a></li>
-          </ul><br>
+         <li id="personal"><a href="#PersonalInformation">Personal information</a></li>
+         <li id="bank"><a href="#BankDetails">Bank Details</a></li>
+         <li id="payment"><a href="#PaymentDetails">Payment Details</a></li>
+       </ul><br>
        <div class="tabcontent">
        <form name="create" ng-submit="ctrl.createDonor();">
          <div id="PersonalInformation">
@@ -82,7 +82,7 @@
 		                        <option>Vizag</option>
 		                      </select>
 	                   </div> <br>
-	                <label>State</label>
+	                <label>Name</label>
 	                 <div class="input-group input-group-md">
 	                  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-bookmark"></span></span>
 	                      <!-- <input type="text" class="form-control"  placeholder="First Name" aria-describedby="sizing-addon1"> -->
@@ -109,17 +109,14 @@
                         <option>Vizag</option> 
                        </select>
                    </div><br> 
-                   
-                    <ul>
-              
-                 <li class="bank"><a href="#BankDetails"><span id="gly"class="glyphicon glyphicon-chevron-right"></span></a></li>
-             </ul>
               
            </div>
-        
            
-           
-            
+             <!-- <ul>
+                 <li id="bank"><a href="#BankDetails"><span class="glyphicon glyphicon-chevron-right"></span></a></li> 
+                 <li id="bank"><a href="#BankDetails"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+             </ul>-->
+              </div>
           <div id="BankDetails">
           <label>Account Holder Name</label>
             <div class="input-group input-group-md">
@@ -185,12 +182,10 @@
 						</select>
 						<span style="color:red" ng-show="create.account_type.$dirty && create.account_type.$error.required">Account Type is Required</span>
 					</div><br>
-					
-				
-		   <ul>
-					<li class="personal"><a  href="#PersonalInformation"><span id="gly3" class="glyphicon glyphicon-chevron-left"></span></a></li>
-					<li class="payment"><a href="#PaymentDetails"><span id="gly1" class="glyphicon glyphicon-chevron-right"></span></a></li>
-			   </ul>	 
+		<!--   <ul>
+					<li class="previous"><a  href="#PersonalInformation"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+					<li class="next"><a href="#PaymentDetails"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+			   </ul>	-->
           </div>
           <div id="PaymentDetails">
           <label>Start Date</label>
@@ -222,17 +217,19 @@
 	                                             <span style="color:red" ng-show="create.startdate.$error.invalidDate || create.enddate.$error.invalidDate">Check dates for validity</span>
 	                                             <span style="color:red" ng-show="create.enddate.$error.required && create.enddate.$dirty">End date is Required</span>
 	        </div>  -->
-	  <label>Amount</label>
+			
 	  	<div class="input-group input-group-md">
 				<span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-usd"></span></span>
-				<input type="text" class="form-control" name="amount" placeholder="Amount in Rupees" aria-describedby="sizing-addon1" ng-model="ctrl.donor_info.amount" required ng-pattern="/^\d+([,.]\d+)?$/" ng-maxlength="13">
+				<input type="text" class="form-control" name="amount" placeholder="Amount in Rupees" aria-describedby="sizing-addon1" ng-model="dono.donor_info.paymentDetailsAmountInRs" required ng-pattern="/^\d+([,.]\d+)?$/" ng-maxlength="13">
 			    <span style="color:red" ng-show="create.amount.$dirty && create.amount.$error.pattern">It should be numbers</span><br>
                          <span style="color:red" ng-show="create.amount.$dirty && create.amount.$error.maxlength">It is too long</span>
 			</div> <br>
-            <label>Comments</label>	
-		<div class="form-group">
-		<textarea class="form-control" rows="3" columns="3" resize="none" ng-model="ctrl.donor_info.donorComments"></textarea>
-		</div>
+
+			
+			
+		<label>Comments</label>	
+		<textarea class="form-control" rows="3" columns="3" resize="none" ng-model="ctrl.donar_info.donorComments"></textarea>
+		<br>
 		
 		<label>Frequency</label>	
 			<div class="input-group input-group-md">
@@ -251,44 +248,42 @@
 					 	</div> <br> 
 											
 	
-		 					
-     <ul>
-			 <li class="bank"><a href="#BankDetails"><span id="gly3" class="glyphicon glyphicon-chevron-left"></span></a></li>
-	</ul> 
-	         <button id="sub" type="submit" class="btn btn-primary" >Submit</button>&nbsp;
+		 					<button type="submit" class="btn btn-primary" >Submit</button>
+  <!--   <ul>
+			 <li class="previous"><a href="#PaymentDetails"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+		 </ul> --> 
           </div>
-          </form>
           </div>
        </div>
     </div>
 	 <script>
 	$("document").ready(function(){
-		$('.personal').click(function(e){
+		$('#personal').click(function(e){
 			e.preventDefault();
-			$('.personal').addClass("active");
+			$('#personal').addClass("active");
 			$('#PersonalInformation').fadeIn(500);
 			$('#BankDetails').hide();
 			$('#PaymentDetails').hide();
-			$('.bank').removeClass("active");
-			$('.payment').removeClass("active");
+			$('#bank').removeClass("active");
+			$('#payment').removeClass("active");
 		});
-		$('.bank').click(function(e){
+		$('#bank').click(function(e){
 			e.preventDefault();
-			$('.bank').addClass("active");
+			$('#bank').addClass("active");
 			$('#BankDetails').fadeIn(500);
 			$('#PaymentDetails').hide();
 			$('#PersonalInformation').hide();
-			$('.personal').removeClass("active");
-			$('.payment').removeClass("active");
+			$('#personal').removeClass("active");
+			$('#payment').removeClass("active");
 		});
-		$('.payment').click(function(e){
+		$('#payment').click(function(e){
 			e.preventDefault();
-			$('.payment').addClass("active");
+			$('#payment').addClass("active");
 			$('#PaymentDetails').fadeIn(500);
 			$('#PersonalInformation').hide();
 			$('#BankDetails').hide();
-			$('.personal').removeClass("active");
-			$('.bank').removeClass("active");
+			$('#personal').removeClass("active");
+			$('#bank').removeClass("active");
 		});
 	});
 </script>

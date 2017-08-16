@@ -2,125 +2,121 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>login</title>
+<title>Index</title>
 <!-- bootstrap css files -->
-<link rel="stylesheet" href="css/bootstrap-theme.css">
-<link rel="stylesheet" href="css/bootstrap-theme.css.map">
-<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="css/bootstrap-theme.min.css.map">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/bootstrap.css.map">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap.min.css.map">
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Bootstrap js files -->
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<!-- <script type="text/javascript" src="js/npm.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- bootstrap fonts -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
-<!-- <script type="text/javascript" src="js/angular.js"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<link rel="stylesheet" href="css/index.css">
-<link rel="stylesheet" href="css/login.css">
-<script type="text/javascript" src="js/controller/controller.js"></script>
-<script type="text/javascript" src="js/service/service.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- angularjs js file -->
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript" src="../js/angular-resource.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.4/angular-resource.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<script type="text/javascript" src="../js/controller/controller.js"></script>
+<script type="text/javascript" src="../js/service/service.js"></script>
+<script type="text/javascript" src="../js/dirPagination.js"></script>
+<script   src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- css files -->
+	<link rel="stylesheet" href="../css/index.css">
+	<link rel="stylesheet" href="../css/login.css">
 </head>
 <body ng-app="loginApp" ng-controller="loginController as ctrl">
 	<div class="container">
 		<div class="row">
 			 <div class="col-xs-6 col-md-4"></div>
   			 <div class="col-xs-6 col-md-4">
-  			 	<div class="panel panel-default" id="log-form">
-  			 		<div class="panel-header" id="log-header">
-  			 			<ul class="nav nav-tabs nav-justified">
-							<li  class="active"><a data-toggle="tab"  href="#register">SIGN IN</a></li>
-							<li ><a data-toggle="tab" href="#login">SIGN UP</a></li>
-						</ul>
-  			 		</div>
-  			 		<div class="panel-body">
-  			 			<div class="tab-content">
-  			 				 <div id="register" class="tab-pane fade">
-			  			 		<form id="register_form" name="RegisterForm" ng-submit="ctrl.register();">
+  			 <div class="outerDiv">
+			<ul>
+				<li id="log"><a href="#login" >Sign-Up</a></li>
+				<li id="reg"><a href="#register" >Sign-In</a></li>
+			</ul>
+			<div id="login">
+			<div class="alert alert-danger" role="alert"  ng-if="ctrl.ErrorMessage">
+								 {{ctrl.ErrorMessage}} 
+			</div>
+				<form  name="RegisterForm" ng-submit="ctrl.register();">
 	  			 				<div class="form-horizontally">		
 									<div class="form-group" >
-									    <label>First Name</label>
-									    <input type="text" class="form-control" name="firstname" placeholder="First Name"  ng-model="ctrl.registerData.registrationFirstName" ng-minlength="3" ng-maxlength="12" ng-required="true">
-										<span ng-show="RegisterForm.firstname.$dirty && RegisterForm.firstname.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;First Name isRequired!</span>
-										<span ng-show="RegisterForm.firstname.$dirty && RegisterForm.firstname.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;First Name is too short!</span>
-										<span ng-show="RegisterForm.firstname.$dirty && RegisterForm.firstname.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;First Name is too long!</span>
+									     <label>First Name</label> 
+										    	<input type="text" class="form-control" name="firstname" placeholder="Enter your first name.."  ng-model="ctrl.registerData.userName" ng-minlength="3" ng-maxlength="12" ng-required="true">
+												<span ng-show="RegisterForm.firstname.$dirty && RegisterForm.firstname.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;First Name isRequired!</span>
+												<span ng-show="RegisterForm.firstname.$dirty && RegisterForm.firstname.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;First Name is too short!</span>
+												<span ng-show="RegisterForm.firstname.$dirty && RegisterForm.firstname.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;First Name is too long!</span>
 									</div>
 									<div class="form-group" >
-									    <label >Last Name/Surname</label>
-									    <input type="text" class="form-control" name="lastname" placeholder="Last Name/Surname"  ng-model="ctrl.registerData.registrationLastName" ng-minlength="3" ng-maxlength="12" ng-required="true">
-										<span ng-show="RegisterForm.lastname.$dirty && RegisterForm.lastname.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Last Name Required!</span>
-										<span ng-show="RegisterForm.lastname.$dirty && RegisterForm.lastname.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Last Name is too short!</span>
-										<span ng-show="RegisterForm.lastname.$dirty && RegisterForm.lastname.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Last Name is too long!</span>
+									     <label>Last Name</label> 
+										    	<input type="text" class="form-control" name="lastname" placeholder="Enter your Last Name/Surname.."  ng-model="ctrl.registerData.name" ng-minlength="3" ng-maxlength="12" ng-required="true">
+												<span ng-show="RegisterForm.lastname.$dirty && RegisterForm.lastname.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Last Name Required!</span>
+												<span ng-show="RegisterForm.lastname.$dirty && RegisterForm.lastname.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Last Name is too short!</span>
+												<span ng-show="RegisterForm.lastname.$dirty && RegisterForm.lastname.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Last Name is too long!</span>
 									</div>
 									<div class="form-group" >
-									   <label >Email </label>
-									   <input type="email" class="form-control" placeholder="Email" name="email"  ng-model="ctrl.registerData.registrationEmail" ng-required="true">
-									   <span ng-show="RegisterForm.email.$dirty && RegisterForm.email.$invalid && RegisterForm.email.$error.required " style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Email Id Required!</span>
-									   <span ng-show="RegisterForm.email.$error.email" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Enter correct Email Id</span>
+									   <label>Email</label> 
+										    	<input type="email" class="form-control" placeholder="Enter your email.. " name="email"  ng-model="ctrl.registerData.email" ng-required="true">
+									   			<span ng-show="RegisterForm.email.$dirty && RegisterForm.email.$invalid && RegisterForm.email.$error.required " style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Email Id Required!</span>
+									   			<span ng-show="RegisterForm.email.$error.email" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Enter correct Email Id</span>
 									</div>
 									<div class="form-group" >
-										<label >Mobile Number</label>
-										<input type="text" class="form-control" placeholder="Mobile number" name="mobilenumber" ng-model="ctrl.registerData.registrationMobile" ng-minlength="10" ng-maxlength="10" ng-required="true" ng-pattern="/^[7-9]{1}[0-9]{9}$/">
-										<span ng-show="RegisterForm.mobilenumber.$dirty && RegisterForm.mobilenumber.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Mobile Number Required!</span>
-										<span ng-show="RegisterForm.mobilenumber.$dirty && RegisterForm.mobilenumber.$error.pattern && RegisterForm.mobilenumber.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Enter Valid Mobile Number </span>
+										 <label >Mobile Number</label> 
+										<input type="text" class="form-control" placeholder="Enter your mobile number.." name="mobilenumber" ng-model="ctrl.registerData.phoneNo" ng-minlength="10" ng-maxlength="10" ng-required="true" ng-pattern="/^[7-9]{1}[0-9]{9}$/">
+										<span ng-show="RegisterForm.mobilenumber.$dirty && RegisterForm.mobilenumber.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Mobile Number Required!</span>
+										<span ng-show="RegisterForm.mobilenumber.$dirty && RegisterForm.mobilenumber.$error.pattern && RegisterForm.mobilenumber.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Enter Valid Mobile Number </span>
 										<!-- <span ng-show="RegisterForm.mobilenumber.$dirty && RegisterForm.mobilenumber.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Mobile Number is too short!</span> -->
-										<span ng-show="RegisterForm.mobilenumber.$dirty && RegisterForm.mobilenumber.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Mobile number is too long!</span>
+										<span ng-show="RegisterForm.mobilenumber.$dirty && RegisterForm.mobilenumber.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Mobile number is too long!</span>
 									</div>
 									<div class="form-group" >
-										<label >Enter Passcode</label>
-										<input type="password" class="form-control" placeholder="Enter Passcode" name="passcode"  ng-model="ctrl.registerData.registrationPasscode" ng-minlength="6" ng-maxlength="15" ng-required="true"
-										>
-										<span ng-show="RegisterForm.passcode.$dirty && RegisterForm.passcode.$error.required && password_error_show > 0" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Passcode is Required!</span>
-										<span ng-show="RegisterForm.passcode.$dirty && RegisterForm.passcode.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Passcode is too short!</span>
-										<span ng-show="RegisterForm.passcode.$dirty && RegisterForm.passcode.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Passcode is too long!</span>
+										 <label >Enter Passcode</label> 
+										<input type="password" class="form-control" placeholder="Enter the  Passcode.." name="passcode"  ng-model="ctrl.registerData.password" ng-minlength="6" ng-maxlength="15" ng-required="true">
+										<span ng-show="RegisterForm.passcode.$dirty && RegisterForm.passcode.$error.required && password_error_show > 0" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Passcode is Required!</span>
+										<span ng-show="RegisterForm.passcode.$dirty && RegisterForm.passcode.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Passcode is too short!</span>
+										<span ng-show="RegisterForm.passcode.$dirty && RegisterForm.passcode.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Passcode is too long!</span>
 									</div>
 									 <div class="form-group" >
-										<label >Confirm Passcode</label>
-										<input type="text" class="form-control" placeholder="Confirm Passcode" name="Cpasscode"  ng-model="ctrl.registerData.registrationConfirmPasscode" ng-minlength="6" ng-maxlength="15"  ng-required="true" matchPassword="password">
-										<span ng-show="RegisterForm.Cpasscode.$dirty && RegisterForm.Cpasscode.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Confirm Passcode is Required!</span>
-										<span ng-show="RegisterForm.Cpasscode.$dirty && RegisterForm.Cpasscode.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Confirm Passcode is too short!</span>
-										<span ng-show="RegisterForm.Cpasscode.$dirty && RegisterForm.Cpasscode.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Confirm Passcode is too long!</span>
+										 <label >Confirm Passcode</label> 
+										<input type="password" class="form-control" placeholder="Confirm the Passcode.." name="Cpasscode"  ng-model="ctrl.registerData.confirmPassword" ng-minlength="6" ng-maxlength="15"  ng-required="true" matchPassword="password">
+										<span ng-show="RegisterForm.Cpasscode.$dirty && RegisterForm.Cpasscode.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Confirm Passcode is Required!</span>
+										<span ng-show="RegisterForm.Cpasscode.$dirty && RegisterForm.Cpasscode.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Confirm Passcode is too short!</span>
+										<span ng-show="RegisterForm.Cpasscode.$dirty && RegisterForm.Cpasscode.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Confirm Passcode is too long!</span>
 										<span ng-show="RegisterForm.Cpasscode.$error.matchPassword && !RegisterForm.Cpasscode.$error.required " class="help_block">Password's  dont match</span>				
 									</div> 
-									<!-- <div class="form-group">
-										<label >Confirm Passcode</label>
-						                <input type="password" class="form-control"  name="confirm_password" ng-model="ctrl.registerData.registrationConfirmPasscode" placeholder="Confirm password" match-password="password" required>						               
-						                    <span ng-show="RegisterForm.confirm_password.$dirty && RegisterForm.confirm_password.$error.required" class="help-block">Confirm password is required</span>
-						                    <span ng-show="RegisterForm.ctrl.registerData.registrationConfirmPasscode.$error.matchPassword && !RegisterForm.confirm_password.$error.required" class="help-block">Confirm password didn't match</span>
-            						</div> -->
-									<!-- <input type="checkbox" id="terms-box">&ensp;I accept <a href="">terms &amp; conditions</a> -->	
+									 <input type="checkbox" id="terms-box">&ensp;I accept <a href="">terms &amp; conditions</a>
 									<button class="btn  btn-default btn-lg btn-block" ng-disabled="RegisterForm.$invalid">REGISTER</button>
 									<!-- <h5 ><a href="#">Forgot Passcode</a></h5> -->		
 	  			 				</div>
 	  			 			
 	  			 			</form>
-  			 				</div>
-  			 				<div id="login" class="tab-pane fade in active">
-  			 					<!-- <div id="login"> -->
-	  			 					<form id="login_form" ng-submit="ctrl.fetchDonors();" name="loginForm">
+			</div>
+			<div id="register">
+				<form  ng-submit="ctrl.login();" name="loginForm">
 	  			 						<div class="form-horizontally">		
 											<div class="input-group" id="form_group1">
 									  			<span class="input-group-addon" id="first_add"><span class="glyphicon glyphicon-user"></span></span>
-									  			<input type="text" class="form-control" name="name" placeholder="Username" aria-describedby="first_add" ng-model="ctrl.logs.name" ng-minlength="6" ng-maxlength="12" required>
-												<span ng-show="loginForm.name.$dirty && loginForm.name.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Required!</span>
-												<span ng-show="loginForm.name.$dirty && loginForm.name.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Name/Mobile number is too short!</span>
-												<span ng-show="loginForm.name.$dirty && loginForm.name.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Name/Mobile number is too long!</span>
+									  			<input type="text" class="form-control" name="name" placeholder="Enter your " aria-describedby="first_add" ng-model="ctrl.logs.phoneNo" ng-minlength="10"  required>
+												<span ng-show="loginForm.name.$dirty && loginForm.name.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Required!</span>
+												<span ng-show="loginForm.name.$dirty && loginForm.name.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Name/Mobile number is too short!</span>
+												<span ng-show="loginForm.name.$dirty && loginForm.name.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Name/Mobile number is too long!</span>
 											</div>
 											<div class="input-group" id="form_group2">
 											    <span class="input-group-addon" id="second_add"><span class="glyphicon glyphicon-lock"></span></span>
-											    <input type="password" class="form-control" name="password" placeholder="Enter password" aria-describedby="second_add" ng-model="ctrl.logs.password" ng-minlength="6" ng-maxlength="12" matchPassword="password" required>
-												<span ng-show="loginForm.password.$dirty && loginForm.password.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Required!</span>
-												<span ng-show="loginForm.password.$dirty && loginForm.password.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Password is too short!</span>
-												<span ng-show="loginForm.password.$dirty && loginForm.password.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FF9912">&nbsp;&nbsp;Password nuber is too long!</span>
+											    <input type="password" class="form-control" name="password" placeholder="Enter password" aria-describedby="second_add" ng-model="ctrl.logs.password" ng-minlength="6" required>
+												<span ng-show="loginForm.password.$dirty && loginForm.password.$error.required" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Required!</span>
+												<span ng-show="loginForm.password.$dirty && loginForm.password.$error.minlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Password is too short!</span>
+												<span ng-show="loginForm.password.$dirty && loginForm.password.$error.maxlength" style="font-family: Georgia, Times, 'Times New Roman', serif ;color:#FBEC5D">&nbsp;&nbsp;Password nuber is too long!</span>
 												
 											</div>
 											<!-- <input type="checkbox" id="terms-box">&ensp;I accept <a href="">terms &amp; conditions</a> -->	
@@ -128,17 +124,30 @@
 											<!-- <h5 ><a href="#">Forgot Passcode</a></h5> -->		
 	  			 						</div>
 	  			 					</form>
-	  			 			
-  			 				</div>
-
-		  			 	</div> 
-  			 		</div>
-  			 	</div>
+			</div>
+		</div>
   			 </div>
   			 <div class="col-xs-6 col-md-4"></div>
 		
 		</div>
 	</div>
-	
+	<script>
+	$("document").ready(function(){
+		$('#reg').click(function(){
+			$('#reg').addClass("active");
+			$('#log').removeClass("active");
+			$('#register').fadeIn(500);
+			$('#login').hide();
+		});
+		$('#log').click(function(){
+			$('#log').addClass("active");
+			$('#reg').removeClass("active");
+			$('#login').fadeIn(500);
+			$('#register').hide();
+		});
+	});
+
+</script>
 </body>
 </html>
+

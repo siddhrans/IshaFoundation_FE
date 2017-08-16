@@ -1794,7 +1794,7 @@ pre code {
     width: 66.66666667%;
   }
   .col-sm-7 {
-    width: 58.33333333%;
+    width: 45.333333%;
   }
   .col-sm-6 {
     width: 50%;
@@ -1941,6 +1941,7 @@ pre code {
   }
   .col-md-11 {
     width: 91.66666667%;
+       
   }
   .col-md-10 {
     width: 83.33333333%;

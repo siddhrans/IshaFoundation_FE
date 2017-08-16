@@ -1,25 +1,33 @@
-'use strict';
+ 'use strict';
 myApp.factory("localService",['$http','$log','$q',function($http,$log,$q){
 	
 	var factory = {
 			register : registration	,
 			fetchDonors : fetchDonors,
 			createDonor: createDonor,
-			update : update
-
+			update : update,
+			login : login
+		//	userdownload : userdownload
 	};
 	return factory;
 	
 	function registration(registerData){
 		var deferred = $q.defer();
 		$log.log("---Register servivce entered---");
-		$http.post('http://localhost:6512/hello1/',registerData)
+
+        $http({
+            url: 'http://localhost:8080/createVolunteer', 
+            method: 'PUT', 
+            data:registerData, 
+            headers: {'Content-Type': 'application/json'}
+           })
 		.then(function(SuccesResponse){
 			$log.log("----Registerd Successfully----");
 			deferred.resolve(SuccesResponse.data);
 		},
 		function(ErrorResponse){
-			$log.log("----Error while Registering----");
+			
+			$log.log("----Error while Registering----"+ErrorResponse);
 			deferred.reject(ErrorResponse);
 		}
 		);
@@ -27,7 +35,7 @@ myApp.factory("localService",['$http','$log','$q',function($http,$log,$q){
 	};
 	
 	function fetchDonors(){
-		return $http.get("http://localhost:6512/donar1/")
+		return $http.get("http://localhost:8080//ShowAlldonor")
 		.then(function(fetchResponse){
 			return fetchResponse.data;
 			
@@ -38,61 +46,96 @@ myApp.factory("localService",['$http','$log','$q',function($http,$log,$q){
 		);
 	};
 	
-	function createDonor(donar_info) {
+	function createDonor(donor_info) {
 	     console.log('Creating donor');
 	     var deferred = $q.defer();
-	     console.log('-------------------creteDonor service--------------');
-	  
-	     console.log(donar_info);
-	     $http.post('http://localhost:6512/donar1/',donar_info)
+	     console.log('-------------------createDonor service--------------');
+	     console.log(donor_info);
+	     $http.put('http://localhost:8080/createdonor/',donor_info)
 	         .then(
 	             function (response) {
 	            	 console.log('response block');
-	            	 console.log(donar_info);
+	            	 console.log(donor_info);
 	                 deferred.resolve(response.data);
 	             },
 	             function (errResponse) { 
 	                console.error('Error while creating Donor :');
 	                deferred.reject(errResponse);
-	             }
-	         );
+	             });
 	     return deferred.promise;
 	 };
-	
-	 function update(DonorsList,ids){
+	 
+	 
+	function update(id,selectedContact){
+		var deferred = $q.defer();
+		$log.log(id);
+		$log.log(selectedContact);
+		var url= "http://localhost:8080/updatedonor";
+		
+		$http.put("http://localhost:8080/updatedonor/",id,selectedContact)
+		.then(function(response){
+			$log.log("-----Successfully updated----");	
+			return response.data
+		},function(ErrorResponse){
+			 $log.log(ErrorResponse);
+			 $log.error(ErrorResponse);
+			 deferred.reject(ErrorResponse);
+		})
+		 return deferred.promise;
+	};
+	 function login(logs){
 		 var deferred = $q.defer();
-		 $log.log("------updateeeee---------");
-		 var Urll = 'http://localhost:6512/donar1/' + ids;
-		 $log.log(" ----  " + ids + "----- " + Urll) ;
-		 $http.put(Urll,DonorsList)
-		 .then(function(res){
-			 $log.log("-sucess-");
-			 var data = res.data;
-			 return data;
-			 deferred.resolve(res.data);
-		 },function(errResponse){
-			 console.error('Error while creating Donor :');
-             deferred.reject(errResponse);
+		 $log.log("-----------Login service entered-------");
+		 $http.put('http://localhost:8080/login',logs)
+		 .then(function(SuccessResponse){
+			 $log.log("-----Successfully loged in-----");
+			 deferred.resolve(SuccessResponse);
+		 },function(ErrorResponse){
+			 $log.log("Error while logging-In");
+			 deferred.reject(ErrorResponse);
 		 })
 		 return deferred.promise;
 	 };
-	  /* function updateDonor(donar_info){
-		 var deferred=$q.defer();
-		 console.log('-----------------updateDonor service---------------');
-		 $http.put('http://localhost:6512/donar1/',donar_info)
-		 .then(
-				 function(response){
-					 console.log('response block');
-					 console.log(donar_info);
-					 fetchDonors();
-					  deferred.resolve(response.data);
-					  },
-					  function(errResponse) {
-						  console.error('Error while updating Donor :'); 
-						  deferred.reject(errResponse);
-					  }
-				 );
-		 return deferred.promise;
-	 };*/
 
 }]);
+
+myApp.service('fileUpload', ['$http','$q','$resource', function ($http,$q,$resource) {
+	
+		this.post= function(uploadurl, data){
+		console.log('controller');
+		var fd = new FormData();
+		console.log('------------');
+		for(var file in data)
+			 fd.append(file, data[key]);
+		 console.log(fd);
+		$http.post(uploadurl,fd,{
+		transformRequest: angular.identity,
+		headers: {'Content-Type' : undefined }
+		})/*.success(function() {
+			  alert("file upload success");
+        })
+.error(function() {
+alert("file upload failure");
+        });*/
+		};
+	
+/*	this.post = function(file) {
+	console.log(file);
+	var uploadUrl = "http://localhost:8080/downloadxls";
+	var fd = new FormData();
+	fd.append('file', file);
+	$http.post(uploadUrl, fd, {
+	  transformRequest: angular.identity,
+	  headers: { 'Content-Type': undefined }
+	
+	            })
+	  .success(function() {
+	  alert("file upload success");
+	            })
+	  .error(function() {
+	  alert("file upload failure");
+	            });
+	 };*/
+}]);
+    
+
