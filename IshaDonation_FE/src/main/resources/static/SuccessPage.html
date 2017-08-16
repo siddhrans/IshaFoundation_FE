@@ -1,129 +1,16 @@
-<!DOCTYPE html >
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>login</title>
-<!-- bootstrap css files -->
-<link rel="stylesheet" href="css/bootstrap-theme.css">
-
-<link rel="stylesheet" href="css/bootstrap-theme.css.map">
-<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-
-<link rel="stylesheet" href="css/bootstrap-theme.min.css.map">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/bootstrap.css.map">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap.min.css.map">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- Bootstrap js files -->
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/npm.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- bootstrap fonts -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- angularjs js file -->
-<base href="/"/>
-<script type="text/javascript" src="js/angular.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.js"></script>
-<script type="text/javascript" src="js/controller/controller.js"></script>
-<script type="text/javascript" src="js/service/service.js"></script>
-
-
-<!-- css files -->
-
-<link rel="stylesheet" href="css/index.css">
-</head>
-<body ng-app="loginApp" ng-controller="loginController as ctrl">
-<div class="container-fluid" >
-	<div class="row" id="toolBar">
-		<div class="col-xs-12 col-md-4" id="menuBar">
-			<img src="images/logo.png" alt="Isha Foundation">
-		</div>
-		<div class="col-xs-12 col-md-4" id="Dash">Dashboard</div>
-			<div class="col-xs-12 col-md-4">
-				<div id="user-info">
-					<i class="glyphicon glyphicon-user" style="font-size:20px"></i>
-					<h5 id="user-info-name" style="margin-left: 58px;margin-top:-20px;">Hi Dear User</h5>
-				</div>
-				<div id="settings-sign-out">
-					<ul>
-						<li><a href="#"><i class="glyphicon glyphicon-cog" data-toggle="tooltip"  data-placement="bottom"  title="settings"></i> </a></li>
-						<li><a href="#"><i class="material-icons" data-toggle="tooltip"  data-placement="bottom" title="help?" style="margin-top: 9px;">&#xe8fd;</i></a></li>
-						<li><a href="#"><i class="glyphicon glyphicon-log-out" data-toggle="tooltip" data-placement="bottom"  title="sign-out" ></i></a></li>
-					</ul>
-				</div>
-			</div>
-	</div>
-</div>
-
-<!-- start of wrapper -->
-	<div id="wrapper">
-		<!-- Sidebar -->
-			<div  id="sidebar-wrapper" >
-				<ul class="sidebar-nav">
-							<li style="margin-top: -36px;color:#fff;">MENU <i class="glyphicon glyphicon-th" style="margin-left: 82px;font-size: 20px;"></i></li>
-							<li class="active"><a href="dashboard.html">DASHBOARD</a></li>
-				  			<li active="active"><a href="CreateDonor.html">CREATE DONOR</a></li>
-				  			<li><a href="">BULK OPERATIONS</a></li>
-				  			<li><a href="">REPORTS</a></li>
-				</ul>
-			</div>
-	 <div class="row">
-    <div class="span12">
-      <div ui-view></div>        
-    </div>
-    </div>
-			
-			<div id="sidebar-wrapper2" class="nav2">
-				<ul class="sidebar-nav" style="padding-top: 35px;">
-					<li > <i class="glyphicon glyphicon-home"></i></li>
-				  	<li><i class="fa fa-user-plus"></i></li>
-				  	<li><i class="glyphicon glyphicon-floppy-save"></i></li>
-				  	<li><i class="fa fa-folder-open"></i></li>
-				</ul>
-				
-			</div>
-			  
-			<!-- <a href="#" id="menu-toggle"><i class="glyphicon glyphicon-list" style="font-size: 30px; margin-left: 60px;" id="act"></i></a> -->
-		<!-- end of sidebar -->
-		
-		<!-- page content -->
-	<div id="page-content-wrapper">
-				<div id="container-fluid" id="containerBody" style="background:#F0F0F0">
-					<div class="row">
-					<!-- start of container -->
-						<div class="container">
-							<div class="row">
-								<div class="col-xs-8 col-md-8">
-    								<center id="c1">
-    									<P  id="Successfull" class="img-circle"><i class="fa fa-check-square-o" style="font-size: 70px;margin-top: 80px;"></i></P>
-    								<!-- <span style="color:yellowgreen;font-size:160px;">&#9745;</span> -->
-    									<p id="sucess">Successfull</p>
-									</center>
- 									<center><p id="s1">Donation under process</p></center><br>
-									<center ><a href="http://localhost:6511/CreateDonor.html"><input type="button" class="btn btn-default" value="CREATE NEW DONOR"  id="new"></a></center><br> 
- 									<span class="glyphicon glyphicon-print"  id="glycolic"></span><br>
- 									<p  id="print">Print Receipt</p>
-  								</div>		
-							</div>
-							
-							<div class="col-xs-6 col-md-4"></div>
-									
-							</div>
-						</div>
-				<!-- End of container -->
-					</div>
-				</div>
-	</div>
-<!-- End of wrapper -->
+<div class="col-xs-8 col-md-8">
+				<center id="c1">
+					<P  id="Successfull" class="img-circle"><i class="fa fa-check-square-o" style="font-size: 70px;margin-top: 80px;"></i></P>
+			<!-- <span style="color:yellowgreen;font-size:160px;">&#9745;</span> -->
+				<p id="sucess">Successfull</p>
+		</center>
+			<center><p id="s1">Donation under process</p></center><br>
+		<center ><a href="#!CreateDonor"><input type="button" class="btn btn-default" value="CREATE NEW DONOR"  id="new"></a></center><br> 
+	<span class="glyphicon glyphicon-print"  id="glycolic"></span><br>
+	<p  id="print">Print Receipt</p>
+	</div>		
 <script>
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
 });
 </script>
-
-</body>
-</html>

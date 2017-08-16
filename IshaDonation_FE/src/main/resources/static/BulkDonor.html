@@ -1,0 +1,50 @@
+<div class="col-md-12">
+<h3 class="w2">Download</h3>
+<div class="download">
+   
+<div class="information">
+<!--  <a href="#"  file-name="'fileName.extension'"  ng-click="ctrl.getFile()" file-download="myBlobObject"><i class="glyphicon glyphicon-save"></i></a>-->
+<!--  <a href="#"  ng-click="ctrl.userdownload()"><i class="glyphicon glyphicon-save"></i></a> -->
+<button   ng-click="ctrl.userdownload('NewDonorFile')"><i class="glyphicon glyphicon-save"></i></button>
+<h3>New Donor File</h3>
+</div>
+<div class="remittance">
+<!--  <a href="#"><i class="glyphicon glyphicon-save"></i></a>-->
+<button ng-click="ctrl.monthly_remittances()"><i class="glyphicon glyphicon-save"></i></button>
+<h3>Monthly Remittances File</h3>
+</div>
+</div>
+<h3 class="w2">Upload</h3>
+
+<div class="upload">
+<div class="recon">
+<i class="glyphicon glyphicon-open"></i>
+<!--   <input file-model="selectedUploadFile" type="file" name="file" id="fileUpload"/>
+    
+<span id="lblError" style="color: red;"></span></br>
+
+ <button ng-click="ctrl.uploadFile()" id="btnUpload" onclick="return ValidateExtension()">upload</button> -->
+<!--   <input type="file" file-model="customer.file" name="myFile" id="fileUpload" onclick="return ValidateExtension()" />-->
+<input type="file" file-model="file" name="" id="fileUpload" />
+  <span id="lblError" style="color: red;"></span></br>
+  <p>{{file.name}}</p>
+    <button ng-click="ctrl.uploadFile(file)" onclick="return ValidateExtension()">upload</button>
+<h3>Reconciliation Report</h3>
+</div>
+</div>
+
+</div>
+<script type="text/javascript">
+    function ValidateExtension() {
+        var allowedFiles = [".xlsx"];
+        var fileUpload = document.getElementById("fileUpload");
+        var lblError = document.getElementById("lblError");
+        var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(" + allowedFiles.join('|') + ")$");
+        if (!regex.test(fileUpload.value.toLowerCase())) {
+            lblError.innerHTML = "Please upload files having extensions: <b>" + allowedFiles.join(', ') + "</b> only.";
+            return false;
+        }
+        lblError.innerHTML = "";
+        return true;
+    }
+</script>
